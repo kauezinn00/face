@@ -1,3 +1,4 @@
-# Face VSL — sem aviso no rodapé
+# Face VSL — sem faixa superior, corrigido
 
-Versão com as fotos de perfil embutidas e sem o texto de aviso no final da página.
+Mesma página da versão anterior, removendo apenas a faixa superior do Facebook.
+Correção aplicada para manter o JavaScript funcionando após a remoção do cabeçalho.
