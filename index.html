@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#f0f2f5" />
+  <meta name="description" content="Template reutilizável Face VSL" />
+  <title>Face VSL Template</title>
+  <style>
+    :root{
+      --bg:#f0f2f5;
+      --card:#fff;
+      --text:#050505;
+      --muted:#65676b;
+      --line:#e4e6eb;
+      --blue:#0866ff;
+      --hover:#f2f2f2;
+      --green:#22a447;
+      --danger:#e41e3f;
+      --max:680px;
+      --radius:10px;
+      --shadow:0 1px 2px rgba(0,0,0,.12);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+    }
+    button,input,textarea{font:inherit}
+    button{cursor:pointer}
+    a{text-decoration:none;color:inherit}
+
+    .topbar{
+      position:sticky;top:0;z-index:30;
+      height:56px;background:#fff;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .topbar-inner{width:min(100%,var(--max));padding:0 12px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.2px}
+    .brand-mark{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-size:22px;font-weight:900}
+    .top-actions{display:flex;gap:8px}
+    .circle-btn{width:36px;height:36px;border:0;border-radius:50%;background:#e4e6eb;display:grid;place-items:center;color:#1c1e21}
+
+    main{width:min(100%,var(--max));margin:14px auto 52px;padding:0 10px}
+    .post{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .post-head{display:flex;gap:10px;align-items:center;padding:12px 16px 7px}
+    .avatar{width:42px;height:42px;border-radius:50%;flex:0 0 auto;background:linear-gradient(135deg,#d8e7ff,#bfd3ff);display:grid;place-items:center;font-weight:800;color:#1f4b88;overflow:hidden}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .identity{min-width:0;flex:1}
+    .identity-line{display:flex;align-items:center;gap:5px;min-width:0}
+    .page-name{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .verified{width:15px;height:15px;border-radius:50%;background:var(--blue);display:inline-grid;place-items:center;color:#fff;font-size:10px;font-weight:900}
+    .meta{margin-top:2px;font-size:13px;color:var(--muted);display:flex;gap:4px;align-items:center}
+    .kebab{border:0;background:transparent;font-size:24px;line-height:1;color:var(--muted);padding:4px 2px}
+
+    .post-copy{padding:4px 16px 12px;font-size:15px;line-height:1.42;white-space:pre-line}
+    .post-copy strong{font-weight:700}
+
+    .video-shell{position:relative;background:#050505;aspect-ratio:16/9;overflow:hidden}
+    .video-shell video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
+    .video-placeholder{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,#263241 0,#151a20 45%,#050505 100%);color:#fff;text-align:center;padding:24px}
+    .video-placeholder.hidden{display:none}
+    .play-orb{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.94);color:#111;display:grid;place-items:center;margin:0 auto 12px;font-size:29px;padding-left:4px;box-shadow:0 8px 25px rgba(0,0,0,.25)}
+    .video-placeholder small{display:block;opacity:.78;margin-top:7px}
+
+    .engagement{padding:9px 16px 7px;display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:14px;border-bottom:1px solid var(--line)}
+    .reactions{display:flex;align-items:center;gap:6px}
+    .reaction-stack{display:flex;align-items:center}
+    .reaction-chip{width:19px;height:19px;border-radius:50%;display:grid;place-items:center;color:white;font-size:11px;border:2px solid #fff;margin-left:-4px}
+    .reaction-chip:first-child{margin-left:0;background:var(--blue)}
+    .reaction-chip:nth-child(2){background:var(--danger)}
+    .reaction-chip:nth-child(3){background:#f7b125}
+    .social-stats{display:flex;gap:10px}
+
+    .action-row{padding:4px 8px;display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}
+    .action{border:0;background:transparent;border-radius:7px;padding:9px 6px;color:var(--muted);font-weight:650;display:flex;gap:7px;align-items:center;justify-content:center;transition:.15s ease}
+    .action:hover{background:var(--hover)}
+    .action.active{color:var(--blue)}
+    .action-icon{font-size:18px;line-height:1}
+
+    .comments{padding:12px 12px 14px}
+    .comment-composer{display:flex;gap:8px;margin-bottom:13px}
+    .mini-avatar{width:34px;height:34px;border-radius:50%;flex:0 0 auto;background:#e4e6eb;display:grid;place-items:center;font-weight:700;color:#5b5f65;font-size:12px}
+    .composer-box{position:relative;flex:1}
+    .composer-input{width:100%;border:0;outline:0;background:#f0f2f5;border-radius:18px;padding:9px 42px 9px 12px;color:var(--text)}
+    .send-comment{position:absolute;right:5px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--blue);font-weight:800;padding:5px 8px}
+
+    .comment{display:flex;gap:8px;margin-top:11px}
+    .comment-body{min-width:0;flex:1}
+    .bubble{display:inline-block;max-width:100%;background:#f0f2f5;border-radius:18px;padding:8px 11px}
+    .comment-name{font-size:13px;font-weight:750;margin-bottom:2px}
+    .comment-text{font-size:14px;line-height:1.32;white-space:pre-line}
+    .comment-actions{display:flex;gap:11px;font-size:12px;color:var(--muted);font-weight:650;padding:3px 8px}
+    .comment-like{border:0;background:transparent;color:inherit;font-weight:700;padding:0}
+    .comment-like.active{color:var(--blue)}
+
+    .offer{margin-top:14px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 16px;text-align:center;display:none}
+    .offer.visible{display:block;animation:reveal .35s ease both}
+    @keyframes reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .offer-kicker{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--blue)}
+    .offer h2{font-size:24px;line-height:1.1;margin:7px auto 8px;max-width:560px}
+    .offer p{margin:0 auto 14px;color:var(--muted);font-size:15px;line-height:1.4;max-width:560px}
+    .cta{border:0;border-radius:10px;background:var(--green);color:#fff;font-weight:800;font-size:17px;padding:14px 18px;width:min(100%,520px);box-shadow:0 4px 0 rgba(0,0,0,.13);transition:.16s ease;display:inline-block}
+    .cta:hover{filter:brightness(.96);transform:translateY(-1px)}
+    .cta:active{transform:translateY(1px);box-shadow:0 2px 0 rgba(0,0,0,.13)}
+    .microcopy{font-size:12px;color:var(--muted);margin-top:9px}
+
+    .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,16px);background:#1c1e21;color:#fff;border-radius:9px;padding:10px 14px;font-size:13px;opacity:0;pointer-events:none;transition:.2s ease;z-index:99;max-width:calc(100vw - 28px);text-align:center}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+
+    .footer-note{color:#8a8d91;text-align:center;font-size:11px;line-height:1.45;padding:24px 12px}
+
+    @media (max-width:560px){
+      body{background:#fff}
+      .topbar{height:50px}
+      .topbar-inner{padding:0 10px}
+      .brand-mark{width:32px;height:32px;font-size:20px}
+      .circle-btn{width:33px;height:33px}
+      main{padding:0;margin:0 auto 28px}
+      .post,.offer{border-radius:0;box-shadow:none}
+      .post-head{padding-left:12px;padding-right:12px}
+      .post-copy{padding-left:12px;padding-right:12px}
+      .engagement{padding-left:12px;padding-right:12px}
+      .offer{border-top:8px solid var(--bg);margin-top:0;padding:20px 14px 22px}
+      .action{font-size:14px}
+      .social-stats .shares-label{display:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" aria-label="Barra superior">
+    <div class="topbar-inner">
+      <div class="brand"><span class="brand-mark">f</span><span id="brandText">Social</span></div>
+      <div class="top-actions" aria-hidden="true">
+        <button class="circle-btn" tabindex="-1">⌕</button>
+        <button class="circle-btn" tabindex="-1">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article class="post" aria-label="Publicação">
+      <div class="post-head">
+        <div class="avatar" id="avatar"><span id="avatarInitials">PV</span></div>
+        <div class="identity">
+          <div class="identity-line">
+            <div class="page-name" id="pageName">Página da VSL</div>
+            <span class="verified" id="verifiedBadge" title="Verificado">✓</span>
+          </div>
+          <div class="meta"><span id="followers">128 mil seguidores</span><span>·</span><span>Patrocinado</span><span>·</span><span>🌐</span></div>
+        </div>
+        <button class="kebab" aria-label="Mais opções">•••</button>
+      </div>
+
+      <div class="post-copy" id="postCopy"></div>
+
+      <div class="video-shell" id="videoShell">
+        <video id="vsl" playsinline controls preload="metadata"></video>
+        <button class="video-placeholder" id="videoPlaceholder" type="button" aria-label="Iniciar vídeo">
+          <div>
+            <div class="play-orb">▶</div>
+            <strong id="videoHeadline">Toque para assistir</strong>
+            <small id="videoSub">Ative o som para uma melhor experiência</small>
+          </div>
+        </button>
+      </div>
+
+      <div class="engagement">
+        <div class="reactions">
+          <div class="reaction-stack" aria-hidden="true">
+            <span class="reaction-chip">👍</span><span class="reaction-chip">♥</span><span class="reaction-chip">😮</span>
+          </div>
+          <span id="likeCountLabel">2,4 mil</span>
+        </div>
+        <div class="social-stats">
+          <span><span id="commentCountLabel">327</span> comentários</span>
+          <span class="shares-label"><span id="shareCountLabel">84</span> compartilhamentos</span>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <button class="action" id="likeBtn" type="button"><span class="action-icon">♡</span><span>Curtir</span></button>
+        <button class="action" id="commentBtn" type="button"><span class="action-icon">◯</span><span>Comentar</span></button>
+        <button class="action" id="shareBtn" type="button"><span class="action-icon">↗</span><span>Compartilhar</span></button>
+      </div>
+
+      <section class="comments" aria-label="Comentários">
+        <div class="comment-composer">
+          <div class="mini-avatar">Você</div>
+          <div class="composer-box">
+            <input id="commentInput" class="composer-input" maxlength="280" placeholder="Escreva um comentário…" aria-label="Escreva um comentário" />
+            <button id="sendComment" class="send-comment" type="button">Enviar</button>
+          </div>
+        </div>
+        <div id="commentsList"></div>
+      </section>
+    </article>
+
+    <section class="offer" id="offerSection" aria-label="Oferta">
+      <div class="offer-kicker" id="offerKicker">Acesso liberado</div>
+      <h2 id="offerTitle">Seu título de oferta entra aqui</h2>
+      <p id="offerText">Substitua este texto pela continuação natural da VSL e pela sua principal proposta de valor.</p>
+      <a id="cta" class="cta" href="#" target="_blank" rel="noopener">QUERO ACESSAR AGORA</a>
+      <div class="microcopy" id="microcopy">Compra segura • acesso conforme sua oferta</div>
+    </section>
+
+    <div class="footer-note" id="footerNote">Template independente para páginas de VSL. Personalize textos, identidade e links antes de publicar.</div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /* ==========================================================
+       CONFIGURAÇÃO RÁPIDA
+       Troque somente este objeto para reaproveitar o template.
+       ========================================================== */
+    const CONFIG = {
+      brandText: "Social",
+      pageName: "Especialista em Bem-estar",
+      avatarUrl: "", // URL opcional de foto de perfil
+      verified: true,
+      followersText: "128 mil seguidores",
+
+      postText: `Eu descobri uma abordagem simples que mudou completamente a forma como minhas alunas encaram esse problema.\n\n▶️ Assista ao vídeo abaixo até o final e entenda o passo a passo.`,
+
+      videoUrl: "", // ex.: "./assets/vsl.mp4" ou URL CDN
+      posterUrl: "", // opcional
+      videoHeadline: "Toque para assistir",
+      videoSub: "Ative o som para uma melhor experiência",
+
+      initialLikes: 2418,
+      initialComments: 327,
+      initialShares: 84,
+
+      // CTA aparece após X segundos REAIS assistidos.
+      // Use 0 para aparecer imediatamente.
+      ctaDelaySeconds: 8,
+      offerKicker: "Acesso liberado",
+      offerTitle: "Continue para ver a oferta completa",
+      offerText: "Este bloco pode receber preço, benefícios, garantia e qualquer seção adicional da sua oferta.",
+      ctaText: "QUERO ACESSAR AGORA",
+      ctaUrl: "#",
+      microcopy: "Compra segura • acesso conforme sua oferta",
+
+      comments: [
+        { name: "Mariana Costa", initials: "MC", text: "Assisti até o final e fez muito sentido. Explicação bem direta!", time: "12 min", likes: 18 },
+        { name: "Ana Paula", initials: "AP", text: "Eu estava procurando algo explicado desse jeito. Vou continuar assistindo 👏", time: "27 min", likes: 9 },
+        { name: "Carla Mendes", initials: "CM", text: "Gostei porque foi direto ao ponto e sem enrolação.", time: "1 h", likes: 24 }
+      ]
+    };
+
+    const $ = (sel) => document.querySelector(sel);
+    const fmt = (n) => n >= 1000 ? (n / 1000).toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + " mil" : n.toLocaleString("pt-BR");
+
+    let likes = CONFIG.initialLikes;
+    let commentsCount = CONFIG.initialComments;
+    let shares = CONFIG.initialShares;
+    let liked = false;
+    let shareRegistered = false;
+    let watchedSeconds = 0;
+    let lastVideoTime = 0;
+    let ctaRevealed = false;
+
+    function initialsFromName(name){
+      return name.trim().split(/\s+/).slice(0,2).map(x => x[0]?.toUpperCase() || "").join("") || "PV";
+    }
+
+    function toast(msg){
+      const el = $("#toast");
+      el.textContent = msg;
+      el.classList.add("show");
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => el.classList.remove("show"), 1800);
+    }
+
+    function updateCounts(){
+      $("#likeCountLabel").textContent = fmt(likes);
+      $("#commentCountLabel").textContent = fmt(commentsCount);
+      $("#shareCountLabel").textContent = fmt(shares);
+    }
+
+    function revealCTA(){
+      if (ctaRevealed) return;
+      ctaRevealed = true;
+      $("#offerSection").classList.add("visible");
+    }
+
+    function renderComment(c, prepend=false){
+      const wrap = document.createElement("div");
+      wrap.className = "comment";
+      wrap.innerHTML = `
+        <div class="mini-avatar">${escapeHtml(c.initials || initialsFromName(c.name))}</div>
+        <div class="comment-body">
+          <div class="bubble">
+            <div class="comment-name">${escapeHtml(c.name)}</div>
+            <div class="comment-text">${escapeHtml(c.text)}</div>
+          </div>
+          <div class="comment-actions">
+            <button class="comment-like" type="button">Curtir</button>
+            <span>Responder</span>
+            <span>${escapeHtml(c.time || "Agora")}</span>
+            <span class="comment-likes">${c.likes ? `· ${c.likes} 👍` : ""}</span>
+          </div>
+        </div>`;
+      const like = wrap.querySelector(".comment-like");
+      const counter = wrap.querySelector(".comment-likes");
+      let n = Number(c.likes || 0), on = false;
+      like.addEventListener("click", () => {
+        on = !on; n += on ? 1 : -1;
+        like.classList.toggle("active", on);
+        counter.textContent = n > 0 ? `· ${n} 👍` : "";
+      });
+      if (prepend) $("#commentsList").prepend(wrap); else $("#commentsList").append(wrap);
+    }
+
+    function escapeHtml(str){
+      return String(str).replace(/[&<>'"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#039;",'"':"&quot;"}[ch]));
+    }
+
+    function init(){
+      document.title = CONFIG.pageName;
+      $("#brandText").textContent = CONFIG.brandText;
+      $("#pageName").textContent = CONFIG.pageName;
+      $("#followers").textContent = CONFIG.followersText;
+      $("#verifiedBadge").style.display = CONFIG.verified ? "inline-grid" : "none";
+      $("#postCopy").textContent = CONFIG.postText;
+      $("#videoHeadline").textContent = CONFIG.videoHeadline;
+      $("#videoSub").textContent = CONFIG.videoSub;
+      $("#offerKicker").textContent = CONFIG.offerKicker;
+      $("#offerTitle").textContent = CONFIG.offerTitle;
+      $("#offerText").textContent = CONFIG.offerText;
+      $("#cta").textContent = CONFIG.ctaText;
+      $("#cta").href = CONFIG.ctaUrl || "#";
+      $("#microcopy").textContent = CONFIG.microcopy;
+
+      const avatar = $("#avatar");
+      $("#avatarInitials").textContent = initialsFromName(CONFIG.pageName);
+      if (CONFIG.avatarUrl){
+        avatar.innerHTML = `<img src="${escapeHtml(CONFIG.avatarUrl)}" alt="Foto do perfil" loading="eager" decoding="async">`;
+      }
+
+      const v = $("#vsl");
+      if (CONFIG.videoUrl) v.src = CONFIG.videoUrl;
+      if (CONFIG.posterUrl) v.poster = CONFIG.posterUrl;
+      if (!CONFIG.videoUrl) v.removeAttribute("controls");
+
+      CONFIG.comments.forEach(c => renderComment(c));
+      updateCounts();
+      if (CONFIG.ctaDelaySeconds <= 0) revealCTA();
+    }
+
+    $("#likeBtn").addEventListener("click", () => {
+      liked = !liked;
+      likes += liked ? 1 : -1;
+      $("#likeBtn").classList.toggle("active", liked);
+      $("#likeBtn .action-icon").textContent = liked ? "👍" : "♡";
+      updateCounts();
+      toast(liked ? "Você curtiu esta publicação" : "Curtida removida");
+    });
+
+    $("#commentBtn").addEventListener("click", () => {
+      $("#commentInput").focus();
+      $("#commentInput").scrollIntoView({behavior:"smooth", block:"center"});
+    });
+
+    $("#shareBtn").addEventListener("click", async () => {
+      if (!shareRegistered){ shares += 1; shareRegistered = true; updateCounts(); }
+      const data = { title: document.title, text: "Veja este vídeo", url: location.href };
+      try {
+        if (navigator.share) await navigator.share(data);
+        else {
+          await navigator.clipboard.writeText(location.href);
+          toast("Link copiado para compartilhar");
+        }
+      } catch(e) {
+        if (e?.name !== "AbortError") toast("Compartilhamento indisponível neste navegador");
+      }
+    });
+
+    function sendComment(){
+      const input = $("#commentInput");
+      const text = input.value.trim();
+      if (!text) return;
+      renderComment({ name:"Você", initials:"VC", text, time:"Agora", likes:0 }, true);
+      input.value = "";
+      commentsCount += 1;
+      updateCounts();
+      toast("Comentário publicado nesta página");
+    }
+    $("#sendComment").addEventListener("click", sendComment);
+    $("#commentInput").addEventListener("keydown", e => {
+      if (e.key === "Enter" && !e.shiftKey){ e.preventDefault(); sendComment(); }
+    });
+
+    const video = $("#vsl");
+    const placeholder = $("#videoPlaceholder");
+
+    placeholder.addEventListener("click", async () => {
+      if (!CONFIG.videoUrl){
+        toast("Adicione sua VSL em CONFIG.videoUrl");
+        return;
+      }
+      placeholder.classList.add("hidden");
+      video.setAttribute("controls", "");
+      try { await video.play(); } catch(e) { /* browser may block; controls remain */ }
+    });
+
+    video.addEventListener("play", () => placeholder.classList.add("hidden"));
+    video.addEventListener("timeupdate", () => {
+      const now = video.currentTime || 0;
+      const delta = now - lastVideoTime;
+      // Conta apenas progressão natural. Saltos grandes não liberam o CTA instantaneamente.
+      if (delta > 0 && delta < 1.5 && !video.paused) watchedSeconds += delta;
+      lastVideoTime = now;
+      if (watchedSeconds >= CONFIG.ctaDelaySeconds) revealCTA();
+    });
+    video.addEventListener("seeking", () => { lastVideoTime = video.currentTime || 0; });
+    video.addEventListener("ended", revealCTA);
+
+    $("#cta").addEventListener("click", e => {
+      if (!CONFIG.ctaUrl || CONFIG.ctaUrl === "#"){
+        e.preventDefault();
+        toast("Defina o checkout em CONFIG.ctaUrl");
+      }
+    });
+
+    init();
+  </script>
+</body>
+</html>
