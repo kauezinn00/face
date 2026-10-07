@@ -1,275 +1,4 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#f0f2f5" />
-  <meta name="description" content="Template reutilizável de página Face VSL" />
-  <title>Especialista em Bem-estar | VSL</title>
-  <style>
-    :root{
-      --bg:#f0f2f5;
-      --card:#fff;
-      --text:#050505;
-      --muted:#65676b;
-      --muted-2:#8a8d91;
-      --line:#ced0d4;
-      --soft:#f0f2f5;
-      --soft-2:#e4e6eb;
-      --blue:#1877f2;
-      --green:#22a447;
-      --danger:#f02849;
-      --warning:#f7b928;
-      --max:680px;
-      --shadow:0 1px 2px rgba(0,0,0,.12);
-      --radius:10px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-      -webkit-font-smoothing:antialiased;
-      text-rendering:optimizeLegibility;
-    }
-    button,input,textarea{font:inherit}
-    button{cursor:pointer}
-    a{text-decoration:none;color:inherit}
-    img{max-width:100%;display:block}
 
-    .topbar{
-      position:sticky;top:0;z-index:50;
-      background:#fff;border-bottom:1px solid var(--line);
-      box-shadow:0 1px 2px rgba(0,0,0,.06);
-      height:56px;
-      display:flex;align-items:center;justify-content:center;
-    }
-    .topbar-inner{width:min(100%,var(--max));display:flex;align-items:center;justify-content:space-between;padding:0 12px}
-    .brand{display:flex;align-items:center;gap:8px;min-width:0}
-    .brand-mark{
-      width:40px;height:40px;border-radius:50%;background:var(--blue);
-      display:grid;place-items:center;color:#fff;font-size:27px;font-weight:800;line-height:1;
-      font-family:Arial,sans-serif;
-    }
-    .brand-text{font-size:26px;font-weight:700;color:var(--blue);letter-spacing:-.5px;line-height:1}
-    .top-actions{display:flex;gap:8px}
-    .circle-btn{width:40px;height:40px;border:0;border-radius:50%;background:var(--soft-2);display:grid;place-items:center;color:#1c1e21;padding:0}
-    .circle-btn svg{width:20px;height:20px}
-
-    main{width:min(100%,var(--max));margin:16px auto 52px;padding:0 10px}
-    .post,.offer{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-
-    .post-head{display:flex;gap:9px;align-items:flex-start;padding:12px 16px 7px}
-    .avatar,.mini-avatar{position:relative;flex:0 0 auto;overflow:hidden;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#dce7ff,#bed2ff);color:#315ba2;font-weight:700}
-    .avatar{width:40px;height:40px;font-size:14px;border:1px solid rgba(0,0,0,.05)}
-    .mini-avatar{width:32px;height:32px;font-size:11px;border:1px solid rgba(0,0,0,.05)}
-    .reply .mini-avatar{width:24px;height:24px;font-size:10px}
-    .avatar img,.mini-avatar img{width:100%;height:100%;object-fit:cover}
-    .identity{min-width:0;flex:1}
-    .identity-line{display:flex;align-items:center;gap:4px;min-width:0}
-    .page-name{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.08px}
-    .verified{width:14px;height:14px;border-radius:50%;display:inline-grid;place-items:center;background:var(--blue);color:#fff;flex:0 0 auto}
-    .verified svg{width:9px;height:9px}
-    .meta{margin-top:2px;display:flex;align-items:center;gap:4px;color:var(--muted);font-size:13px;line-height:1}
-    .meta .globe{display:inline-grid;place-items:center;color:var(--muted)}
-    .meta .globe svg{width:12px;height:12px}
-    .kebab{background:transparent;border:0;color:var(--muted);padding:4px;margin:-4px -4px 0 0;line-height:1;display:grid;place-items:center}
-    .kebab svg{width:20px;height:20px}
-
-    .post-copy{padding:1px 16px 12px;font-size:15px;line-height:1.38;white-space:pre-line;letter-spacing:-.05px}
-
-    .video-shell{position:relative;background:#000;aspect-ratio:16/9;overflow:hidden}
-    .video-shell video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
-    .video-placeholder{position:absolute;inset:0;border:0;color:#fff;display:grid;place-items:center;text-align:center;background:radial-gradient(circle at center, rgba(46,52,64,.55), rgba(0,0,0,.88));padding:24px}
-    .video-placeholder.hidden{display:none}
-    .play-orb{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.95);color:#111;margin:0 auto 12px;box-shadow:0 10px 24px rgba(0,0,0,.25)}
-    .play-orb svg{width:28px;height:28px;margin-left:4px}
-    .video-placeholder strong{display:block;font-size:20px;line-height:1.15}
-    .video-placeholder small{display:block;opacity:.86;margin-top:8px;font-size:13px}
-
-    .engagement{padding:9px 16px 8px;display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:14px;border-bottom:1px solid var(--line);gap:8px}
-    .reactions{display:flex;align-items:center;gap:6px;min-width:0}
-    .reaction-stack{display:flex;align-items:center;position:relative}
-    .reaction-chip{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;border:1.5px solid #fff;margin-left:-2px;box-shadow:0 0 0 1px rgba(0,0,0,.04)}
-    .reaction-chip:first-child{margin-left:0}
-    .reaction-chip svg{width:18px;height:18px}
-    .social-stats{display:flex;gap:8px;white-space:nowrap;flex-wrap:wrap;justify-content:flex-end}.social-stats span:hover,#likeCountLabel:hover{text-decoration:underline;cursor:default}
-
-    .action-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:3px 8px 4px;border-bottom:1px solid var(--line)}
-    .action{border:0;background:transparent;border-radius:6px;padding:7px 6px;color:var(--muted);font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .15s ease,color .15s ease}
-    .action:hover{background:#f2f3f5}
-    .action.active{color:var(--blue)}
-    .action svg{width:18px;height:18px;flex:0 0 auto}
-
-    .comments{padding:9px 12px 14px}
-    .comment-sort{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:14px;font-weight:600;margin-bottom:9px}
-    .comment-sort .caret{font-size:12px;transform:translateY(-1px)}
-    .comment-composer{display:flex;gap:8px;margin-bottom:12px}
-    .composer-box{position:relative;flex:1}
-    .composer-input{width:100%;border:0;outline:0;background:var(--soft);border-radius:18px;padding:9px 102px 9px 12px;color:var(--text)}
-    .composer-tools{position:absolute;right:8px;top:50%;transform:translateY(-50%);display:flex;gap:7px;align-items:center}
-    .send-comment{border:0;background:transparent;color:var(--blue);font-weight:700;padding:2px 0;line-height:1}
-    .tiny-icon{display:grid;place-items:center;color:var(--muted-2)}
-    .tiny-icon svg{width:18px;height:18px}
-
-    .comment,.reply{display:flex;gap:8px;margin-top:12px}
-    .reply-thread{margin-left:38px;border-left:2px solid #e4e6eb;padding-left:8px}
-    .reply{margin-top:8px}
-    .comment-body{min-width:0;flex:1}
-    .bubble-wrap{display:inline-flex;align-items:flex-end;position:relative;max-width:100%}
-    .bubble{display:inline-block;max-width:100%;background:var(--soft);border-radius:18px;padding:7px 11px 8px;position:relative}
-    .comment-name{font-size:13px;font-weight:700;margin-bottom:1px;line-height:1.2}
-    .comment-text{font-size:14px;line-height:1.34;white-space:pre-line}
-    .reply .comment-text{font-size:13px}
-    .comment-pill{position:absolute;right:-10px;bottom:-8px;background:#fff;border:1px solid #dadde1;border-radius:12px;display:inline-flex;align-items:center;gap:3px;padding:1px 6px 1px 3px;box-shadow:0 1px 2px rgba(0,0,0,.12)}
-    .comment-pill-icon{width:16px;height:16px;border-radius:50%;display:grid;place-items:center}
-    .comment-pill-icon svg{width:16px;height:16px}
-    .comment-pill-count{font-size:12px;color:var(--muted);font-weight:600;line-height:1}
-    .comment-actions{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:12px;font-weight:600;padding:4px 8px 0}
-    .comment-like{border:0;background:transparent;color:inherit;font-weight:600;padding:0}
-    .comment-like.active{color:var(--blue)}
-    .comment-likes{white-space:nowrap}
-    .load-more{margin-top:14px;background:transparent;border:0;padding:0;color:var(--muted);font-weight:600;font-size:14px}
-
-    .offer{margin-top:14px;padding:18px 16px;text-align:center;display:none}
-    .offer.visible{display:block;animation:reveal .3s ease both}
-    @keyframes reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-    .offer-kicker{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--blue)}
-    .offer h2{font-size:24px;line-height:1.1;margin:7px auto 8px;max-width:560px}
-    .offer p{margin:0 auto 14px;color:var(--muted);font-size:15px;line-height:1.4;max-width:560px}
-    .cta{border:0;border-radius:10px;background:var(--green);color:#fff;font-weight:800;font-size:17px;padding:14px 18px;width:min(100%,520px);display:inline-block;box-shadow:0 4px 0 rgba(0,0,0,.13);transition:.16s ease}
-    .cta:hover{filter:brightness(.98);transform:translateY(-1px)}
-    .cta:active{transform:translateY(1px);box-shadow:0 2px 0 rgba(0,0,0,.13)}
-    .microcopy{font-size:12px;color:var(--muted);margin-top:9px}
-
-    .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,16px);background:#1c1e21;color:#fff;border-radius:9px;padding:10px 14px;font-size:13px;opacity:0;pointer-events:none;transition:.2s ease;z-index:99;max-width:calc(100vw - 28px);text-align:center}
-    .toast.show{opacity:1;transform:translate(-50%,0)}
-    .footer-note{color:#8a8d91;text-align:center;font-size:11px;line-height:1.45;padding:24px 12px}
-
-    @media (max-width:560px){
-      body{background:#fff}
-      .topbar{height:52px}
-      .topbar-inner{padding:0 10px}
-      .brand-mark{width:36px;height:36px;font-size:24px}
-      .brand-text{font-size:24px}
-      .circle-btn{width:36px;height:36px}
-      main{padding:0;margin:0 auto 28px}
-      .post,.offer{border-radius:0;box-shadow:none}
-      .post-head,.post-copy,.engagement{padding-left:12px;padding-right:12px}
-      .comments{padding-left:12px;padding-right:12px}
-      .offer{border-top:8px solid var(--bg);margin-top:0;padding:20px 14px 22px}
-      .social-stats{font-size:13px}
-      .composer-input{padding-right:92px}
-      .reply-thread{margin-left:18px;padding-left:7px}
-      .comment-pill{right:-6px}
-      .footer-note{padding-bottom:34px}
-    }
-
-    /* Player VSL: vertical, sem controles nativos, com barra apenas visual */
-    .vsl-stage {width:100%;background:#080808;display:flex;justify-content:center;align-items:center;}
-    .video-shell {position:relative;display:block;aspect-ratio:404/720;width:100%;max-width:404px;overflow:hidden;background:#000;isolation:isolate;}
-    .video-shell video {display:block;object-fit:cover;width:100%;height:100%;background:#000;pointer-events:none;}
-    .video-shell video::-webkit-media-controls, .video-shell video::-webkit-media-controls-enclosure {display:none!important;}
-    .player-progress {position:absolute;left:0;right:0;bottom:0;z-index:9;height:7px;background:rgba(255,255,255,.33);pointer-events:none;}
-    .player-progress-fill {height:100%;width:0%;background:linear-gradient(90deg,#1877f2,#5db1ff);box-shadow:0 0 10px rgba(24,119,242,.45);transition:width .28s linear;}
-    .sound-gate {position:absolute;z-index:8;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:linear-gradient(transparent 5%,rgba(0,0,0,.15) 32%,rgba(0,0,0,.5) 70%,rgba(0,0,0,.25));padding:20px;text-align:center;}
-    .sound-gate[hidden] {display:none!important;}
-    .sound-activate {font-size:16px;font-weight:800;letter-spacing:.02em;line-height:1.2;border:none;border-radius:9px;color:#fff;background:#1877f2;padding:15px 19px;box-shadow:0 8px 28px rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;gap:8px;max-width:100%;animation:soft-pulse 2.5s ease-in-out infinite;}
-    .sound-activate svg {width:24px;height:24px;flex-shrink:0;}
-    .sound-hint {color:white;font-size:13px;font-weight:600;text-shadow:0 1px 4px #000;}
-    .video-loader {display:none;position:absolute;top:16px;right:16px;z-index:6;width:26px;height:26px;border:3px solid rgba(255,255,255,.35);border-top-color:white;border-radius:50%;animation:spin .85s linear infinite;pointer-events:none;}
-    .video-shell.is-buffering .video-loader {display:block;}
-    @keyframes spin {to{transform:rotate(360deg)}}
-    @keyframes soft-pulse {50%{transform:scale(1.035)}}
-    @media (prefers-reduced-motion:reduce){.sound-activate{animation:none}.player-progress-fill{transition:none}}
-    @media(max-width:560px) {.sound-activate {font-size:15px}.video-shell {max-width:404px}}
-  </style>
-</head>
-<body>
-  <main>
-    <article class="post" aria-label="Publicação">
-      <div class="post-head">
-        <div class="avatar" id="avatar"><span id="avatarInitials">PV</span></div>
-        <div class="identity">
-          <div class="identity-line">
-            <div class="page-name" id="pageName">Página da VSL</div>
-            <span class="verified" id="verifiedBadge" title="Verificado" aria-label="Verificado"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.55 16.6L5.4 12.46l1.41-1.42 2.74 2.73 7-7 1.42 1.42z"/></svg></span>
-          </div>
-          <div class="meta"><span id="followers">128 mil seguidores</span><span>·</span><span>Patrocinado</span><span>·</span><span class="globe" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm5.79 7h-2.02a12.3 12.3 0 00-1.1-4 6.03 6.03 0 013.12 4zM10 4c.72.79 1.48 2.25 1.77 5H8.23C8.52 6.25 9.28 4.79 10 4zM4.21 11h2.02c.12 1.43.5 2.82 1.1 4a6.03 6.03 0 01-3.12-4zm2.02-2H4.21a6.03 6.03 0 013.12-4 12.3 12.3 0 00-1.1 4zM10 16c-.72-.79-1.48-2.25-1.77-5h3.54c-.29 2.75-1.05 4.21-1.77 5zm2.67-.99c.6-1.18.98-2.57 1.1-4h2.02a6.03 6.03 0 01-3.12 4z"/></svg></span></div>
-        </div>
-        <button class="kebab" aria-label="Mais opções" type="button"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 10a2 2 0 114 0 2 2 0 01-4 0zm6 0a2 2 0 114 0 2 2 0 01-4 0zm-3-6a2 2 0 114 0 2 2 0 01-4 0z"/></svg></button>
-      </div>
-
-      <div class="post-copy" id="postCopy"></div>
-
-      <div class="vsl-stage">
-        <div class="video-shell" id="videoShell">
-          <video id="vsl" src="./assets/vsl.mp4" poster="./assets/capa.jpg" playsinline webkit-playsinline preload="auto" autoplay muted disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback noplaybackrate" aria-label="Vídeo principal"></video>
-          <div class="video-loader" aria-hidden="true"></div>
-          <div class="sound-gate" id="soundGate" role="group" aria-label="Ativar áudio do vídeo">
-            <button class="sound-activate" id="soundButton" type="button">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm12.5 3a4.5 4.5 0 00-2.5-4.03v8.05a4.5 4.5 0 002.5-4.02zM14 3.23v2.06A7 7 0 0114 18.7v2.06A9 9 0 0014 3.23z"/></svg>
-              <span id="soundButtonText">ATIVAR SOM</span>
-            </button>
-            <span class="sound-hint" id="soundHint">Toque para assistir com áudio</span>
-          </div>
-          <div class="player-progress" aria-hidden="true"><div id="progressFill" class="player-progress-fill"></div></div>
-        </div>
-      </div>
-
-      <div class="engagement">
-        <div class="reactions">
-          <div class="reaction-stack" aria-hidden="true">
-            <span class="reaction-chip"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#1877f2"/><path fill="#fff" d="M8.5 16h5.04c.74 0 1.38-.52 1.54-1.24l.91-4A1.57 1.57 0 0014.46 9H12V6.66c0-.9-.7-1.66-1.57-1.66-.31 0-.61.12-.83.34L7 7.92V16h1.5zM4 16h2V8H4v8z"/></svg></span>
-            <span class="reaction-chip"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#f02849"/><path fill="#fff" d="M10 14.8l-.58-.53C6.1 11.26 4 9.35 4 7 4 5.35 5.35 4 7 4c.93 0 1.82.43 2.4 1.11C9.98 4.43 10.87 4 11.8 4 13.45 4 14.8 5.35 14.8 7c0 2.35-2.1 4.26-5.42 7.27L10 14.8z"/></svg></span>
-            <span class="reaction-chip"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#f7b928"/><path fill="#5b3a00" d="M6.2 7.5a1 1 0 100 2 1 1 0 000-2zm7.6 0a1 1 0 100 2 1 1 0 000-2zM10 13.5c-1.67 0-3-.9-3-2h6c0 1.1-1.33 2-3 2z"/></svg></span>
-          </div>
-          <span id="likeCountLabel">2,4 mil</span>
-        </div>
-        <div class="social-stats">
-          <span><span id="commentCountLabel">263</span> comentários</span>
-          <span><span id="shareCountLabel">42</span> compartilhamentos</span>
-        </div>
-      </div>
-
-      <div class="action-row">
-        <button class="action" id="likeBtn" type="button"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M7.8 16h5.61c.72 0 1.34-.49 1.51-1.19l.97-4.11c.23-.98-.51-1.9-1.51-1.9H12V6.44C12 5.1 10.93 4 9.6 4c-.35 0-.69.15-.93.41L6.2 7.16V16h1.6zM4 16h1.2V7.8H4V16z"/></svg><span>Curtir</span></button>
-        <button class="action" id="commentBtn" type="button"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 3c-4.05 0-7 2.45-7 5.83 0 1.93 1 3.63 2.73 4.72L5.2 17l3.31-1.82c.48.08.98.12 1.49.12 4.05 0 7-2.45 7-5.83S14.05 3 10 3z"/></svg><span>Comentar</span></button>
-        <button class="action" id="shareBtn" type="button"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 4l5 4-5 4V9c-3.73 0-6.1 1.67-7 5 .21-4.67 2.55-8 7-8V4z"/></svg><span>Compartilhar</span></button>
-      </div>
-
-      <section class="comments" aria-label="Comentários">
-        <div class="comment-sort"><span>Comentários</span><span>Mais relevantes <span class="caret">▾</span></span></div>
-        <div class="comment-composer">
-          <div class="mini-avatar" id="selfAvatar">Você</div>
-          <div class="composer-box">
-            <input id="commentInput" class="composer-input" maxlength="280" placeholder="Escreva um comentário…" aria-label="Escreva um comentário" />
-            <div class="composer-tools">
-              <span class="tiny-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M6 5a3 3 0 105.65 1.35h2.1a3 3 0 11-.65 1.9v5.25A2.5 2.5 0 0110.6 16H5.4A2.5 2.5 0 013 13.5v-6A2.5 2.5 0 015.4 5H6zm7.5 3A1.5 1.5 0 1015 9.5 1.5 1.5 0 0013.5 8z"/></svg></span>
-              <span class="tiny-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 18a8 8 0 110-16 8 8 0 010 16zm-2.8-7a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2zm5.6 0a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2zm-5.97-3.08l1.1.66A2.92 2.92 0 0110 7.7c.8 0 1.57.3 2.16.88l1.02-.74A4.45 4.45 0 0010 6.5a4.44 4.44 0 00-3.17 1.42z"/></svg></span>
-              <button id="sendComment" class="send-comment" type="button">Publicar</button>
-            </div>
-          </div>
-        </div>
-        <div id="commentsList"></div>
-        <button id="loadMoreBtn" class="load-more" type="button">Ver mais comentários</button>
-      </section>
-    </article>
-
-    <section class="offer" id="offerSection" aria-label="Oferta">
-      <div class="offer-kicker" id="offerKicker">Acesso liberado</div>
-      <h2 id="offerTitle">Seu título de oferta entra aqui</h2>
-      <p id="offerText">Substitua este texto pela continuação natural da VSL e pela sua principal proposta de valor.</p>
-      <a id="cta" class="cta" href="#" target="_blank" rel="noopener">QUERO ACESSAR AGORA</a>
-      <div class="microcopy" id="microcopy">Compra segura • acesso conforme sua oferta</div>
-    </section>
-</main>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <script>
     const CONFIG = {
       brandText: "facebook",
       pageName: "Especialista em Bem-estar",
@@ -557,15 +286,19 @@
     function hideSoundGate() { soundGate.hidden = true; }
 
     async function beginAutoplay() {
-      // Browsers reliably permit autoplay only when the video starts muted.
-      video.muted = true;
-      video.defaultMuted = true;
       try {
+        video.muted = false;
         await video.play();
-        showSoundGate(false);
+        hideSoundGate();
       } catch (_) {
-        // Safari/embedded browsers can still require a user gesture in some modes.
-        showSoundGate(true);
+        try {
+          video.muted = true;
+          await video.play();
+          showSoundGate(false);
+        } catch (_) {
+          video.muted = true;
+          showSoundGate(true);
+        }
       }
     }
     soundButton.addEventListener('click', async () => {
@@ -576,8 +309,6 @@
           lastVideoTime = 0;
         }
         video.muted = false;
-        video.defaultMuted = false;
-        video.removeAttribute('muted');
         video.volume = 1;
         await video.play();
         hideSoundGate();
@@ -590,10 +321,7 @@
 
     video.addEventListener('waiting', () => playerShell.classList.add('is-buffering'));
     video.addEventListener('playing', () => playerShell.classList.remove('is-buffering'));
-    video.addEventListener('canplay', () => {
-      playerShell.classList.remove('is-buffering');
-      if (video.paused && video.muted) video.play().catch(() => showSoundGate(true));
-    });
+    video.addEventListener('canplay', () => playerShell.classList.remove('is-buffering'));
     video.addEventListener('error', () => {playerShell.classList.remove('is-buffering'); toast('Não foi possível carregar o vídeo.');});
     video.addEventListener('contextmenu', (e) => e.preventDefault());
     // Cosmetic accelerated progress: does NOT seek or change the video's actual speed.
@@ -614,10 +342,9 @@
     video.addEventListener('seeking', () => { lastVideoTime = video.currentTime || 0; });
     video.addEventListener('ended', () => { progressFill.style.width = '100%'; revealCTA(); });
 
-    // Initialize the page/source first. Calling init after play() would reload the MP4.
-    init();
+    // Defer to let DOM/config finish initializing; no delay requested for playback.
     beginAutoplay();
     $('#cta').addEventListener('click', e => { if(!CONFIG.ctaUrl || CONFIG.ctaUrl === '#'){ e.preventDefault(); toast('Defina o checkout em CONFIG.ctaUrl'); } });
-  </script>
-</body>
-</html>
+
+    init();
+  
