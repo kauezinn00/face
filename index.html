@@ -169,7 +169,7 @@
 
     /* Player VSL: vertical, sem controles nativos, com barra apenas visual */
     .vsl-stage {width:100%;background:#080808;display:flex;justify-content:center;align-items:center;}
-    .video-shell {position:relative;display:block;aspect-ratio:404/720;width:100%;max-width:404px;overflow:hidden;background:#000;isolation:isolate;cursor:pointer;touch-action:manipulation;}
+    .video-shell {position:relative;display:block;aspect-ratio:404/720;width:100%;max-width:404px;overflow:hidden;background:#000 url("./assets/capa-anjo-v6.jpg") center/cover no-repeat;isolation:isolate;cursor:pointer;touch-action:manipulation;}
     .video-shell video {display:block;object-fit:cover;width:100%;height:100%;background:#000;pointer-events:none;}
     .video-shell video::-webkit-media-controls, .video-shell video::-webkit-media-controls-enclosure {display:none!important;}
     .player-progress {position:absolute;left:0;right:0;bottom:0;z-index:9;height:7px;background:rgba(255,255,255,.33);pointer-events:none;}
@@ -206,7 +206,7 @@
 
       <div class="vsl-stage">
         <div class="video-shell" id="videoShell">
-          <video id="vsl" src="/assets/vsl.mp4" poster="/assets/capa.jpg" playsinline webkit-playsinline autoplay muted preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback noplaybackrate" aria-label="Vídeo principal"></video>
+          <video id="vsl" poster="./assets/capa-anjo-v6.jpg" playsinline webkit-playsinline autoplay muted preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback noplaybackrate" aria-label="Vídeo principal"><source src="./assets/vsl-anjo-v6.mp4" type="video/mp4"></video>
           <div class="video-loader" aria-hidden="true"></div>
           <div class="sound-gate" id="soundGate" role="group" aria-label="Ativar áudio do vídeo">
             <div class="sound-activate" id="soundButton" aria-hidden="true">
@@ -277,8 +277,8 @@
       verified: true,
       followersText: "128 mil seguidores",
       postText: `Eu descobri uma abordagem simples que mudou completamente a forma como minhas alunas encaram esse problema. 👇\n\nAssista ao vídeo abaixo até o final com o som ligado para entender o passo a passo.`,
-      videoUrl: "/assets/vsl.mp4",
-      posterUrl: "/assets/capa.jpg",
+      videoUrl: "./assets/vsl-anjo-v6.mp4",
+      posterUrl: "./assets/capa-anjo-v6.jpg",
       initialLikes: 2418,
       initialComments: 263,
       initialShares: 42,
@@ -556,7 +556,7 @@
       if (soundEnabled) return;
       soundGate.hidden = false;
       soundText.textContent = 'TOQUE PARA ATIVAR O SOM';
-      soundHint.textContent = 'O vídeo está rodando sem som';
+      soundHint.textContent = video.paused ? 'Toque no vídeo para iniciar com som' : 'O vídeo está rodando sem som';
     }
 
     function hideSoundGate() {
@@ -628,7 +628,7 @@
     video.addEventListener('loadstart', () => playerShell.classList.add('is-buffering'));
     video.addEventListener('waiting', () => playerShell.classList.add('is-buffering'));
     video.addEventListener('stalled', () => playerShell.classList.add('is-buffering'));
-    video.addEventListener('playing', () => playerShell.classList.remove('is-buffering'));
+    video.addEventListener('playing', () => { playerShell.classList.remove('is-buffering'); if (!soundEnabled) soundHint.textContent = 'O vídeo está rodando sem som'; });
     video.addEventListener('loadeddata', () => {
       playerShell.classList.remove('is-buffering');
       attemptMutedAutoplay();
