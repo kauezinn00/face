@@ -1,10 +1,7 @@
-# V7 flat para Vercel
+# Face VSL — CTA simples em 5 segundos
 
-Arquivos importantes ficam todos na raiz.
-
-- index.html
-- anjo-vsl-v7.mp4
-- video-test.html
-- vercel.json
-
-Depois do deploy, abra /video-test para confirmar que o MP4 está sendo servido.
+- Mantém a versão V7 que funcionou na Vercel.
+- Remove título, kicker, descrição e microcopy da oferta.
+- Exibe somente o botão verde pulsante `QUERO ACESSAR AGORA`.
+- O botão aparece após 5 segundos de reprodução assistida, para teste.
+- O botão fica acima da seção de comentários.

@@ -185,6 +185,45 @@
     @keyframes soft-pulse {50%{transform:scale(1.035)}}
     @media (prefers-reduced-motion:reduce){.sound-activate{animation:none}.player-progress-fill{transition:none}}
     @media(max-width:560px) {.sound-activate {font-size:15px}.video-shell {max-width:404px}}
+  
+    .offer{
+      margin:0;
+      padding:14px 12px 12px;
+      text-align:center;
+      display:none;
+      background:#fff;
+      box-shadow:none;
+      border-radius:0;
+    }
+    .offer.visible{
+      display:block;
+      animation:reveal .25s ease both;
+    }
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:min(100%,520px);
+      min-height:54px;
+      padding:14px 22px;
+      border-radius:12px;
+      background:#22a447;
+      color:#fff;
+      font-size:17px;
+      font-weight:800;
+      text-decoration:none;
+      box-shadow:0 4px 0 rgba(0,0,0,.14);
+      border:0;
+    }
+    .cta-pulse{
+      animation:ctaPulse 1.35s ease-in-out infinite;
+      transform-origin:center;
+    }
+    @keyframes ctaPulse{
+      0%,100%{transform:scale(1);box-shadow:0 4px 0 rgba(0,0,0,.14),0 0 0 0 rgba(34,164,71,.30)}
+      50%{transform:scale(1.035);box-shadow:0 4px 0 rgba(0,0,0,.14),0 0 0 10px rgba(34,164,71,0)}
+    }
+
   </style>
 </head>
 <body>
@@ -240,6 +279,10 @@
         <button class="action" id="shareBtn" type="button"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 4l5 4-5 4V9c-3.73 0-6.1 1.67-7 5 .21-4.67 2.55-8 7-8V4z"/></svg><span>Compartilhar</span></button>
       </div>
 
+      <section class="offer" id="offerSection" aria-label="Oferta">
+      <a id="cta" class="cta cta-pulse" href="#" target="_blank" rel="noopener">QUERO ACESSAR AGORA</a>
+    </section>
+
       <section class="comments" aria-label="Comentários">
         <div class="comment-sort"><span>Comentários</span><span>Mais relevantes <span class="caret">▾</span></span></div>
         <div class="comment-composer">
@@ -258,13 +301,7 @@
       </section>
     </article>
 
-    <section class="offer" id="offerSection" aria-label="Oferta">
-      <div class="offer-kicker" id="offerKicker">Acesso liberado</div>
-      <h2 id="offerTitle">Seu título de oferta entra aqui</h2>
-      <p id="offerText">Substitua este texto pela continuação natural da VSL e pela sua principal proposta de valor.</p>
-      <a id="cta" class="cta" href="#" target="_blank" rel="noopener">QUERO ACESSAR AGORA</a>
-      <div class="microcopy" id="microcopy">Compra segura • acesso conforme sua oferta</div>
-    </section>
+    
 </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -282,13 +319,9 @@
       initialLikes: 2418,
       initialComments: 263,
       initialShares: 42,
-      ctaDelaySeconds: 8,
-      offerKicker: "Acesso liberado",
-      offerTitle: "Continue para ver a oferta completa",
-      offerText: "Este bloco pode receber preço, benefícios, garantia e qualquer seção adicional da sua oferta.",
+      ctaDelaySeconds: 5,
       ctaText: "QUERO ACESSAR AGORA",
       ctaUrl: "#",
-      microcopy: "Compra segura • acesso conforme sua oferta",
       selfAvatarText: "Você",
       commentsPerPage: 4,
       comments: [
@@ -491,13 +524,9 @@
       $('#followers').textContent = CONFIG.followersText;
       $('#verifiedBadge').style.display = CONFIG.verified ? 'inline-grid' : 'none';
       $('#postCopy').textContent = CONFIG.postText;
-      $('#offerKicker').textContent = CONFIG.offerKicker;
-      $('#offerTitle').textContent = CONFIG.offerTitle;
-      $('#offerText').textContent = CONFIG.offerText;
-      $('#cta').textContent = CONFIG.ctaText;
+$('#cta').textContent = CONFIG.ctaText;
       $('#cta').href = CONFIG.ctaUrl || '#';
-      $('#microcopy').textContent = CONFIG.microcopy;
-      $('#selfAvatar').textContent = CONFIG.selfAvatarText;
+$('#selfAvatar').textContent = CONFIG.selfAvatarText;
       const avatar = $('#avatar');
       $('#avatarInitials').textContent = initialsFromName(CONFIG.pageName);
       if(CONFIG.avatarUrl) avatar.innerHTML = `<img src="${escapeHtml(CONFIG.avatarUrl)}" alt="Foto do perfil" loading="eager" decoding="async">`;
