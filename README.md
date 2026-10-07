@@ -1,7 +1,7 @@
-# Face VSL — CTA simples em 5 segundos
+# Face VSL — CTA dentro do vídeo
 
-- Mantém a versão V7 que funcionou na Vercel.
-- Remove título, kicker, descrição e microcopy da oferta.
-- Exibe somente o botão verde pulsante `QUERO ACESSAR AGORA`.
-- O botão aparece após 5 segundos de reprodução assistida, para teste.
-- O botão fica acima da seção de comentários.
+- Mantém a base que funcionou na Vercel.
+- CTA aparece após 5 segundos de vídeo assistido, para teste.
+- Botão fica dentro do player, logo acima da barra de progresso fictícia.
+- CTA verde com pulsação mais forte e glow para chamar atenção.
+- Comentários e área social ficam livres, sem botão ocupando espaço.

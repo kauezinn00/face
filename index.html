@@ -224,6 +224,70 @@
       50%{transform:scale(1.035);box-shadow:0 4px 0 rgba(0,0,0,.14),0 0 0 10px rgba(34,164,71,0)}
     }
 
+  
+    /* CTA sobre o player: aparece após o tempo configurado e fica acima da barra fake */
+    .video-shell .offer{
+      position:absolute;
+      left:14px;
+      right:14px;
+      bottom:27px;
+      z-index:14;
+      margin:0;
+      padding:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:transparent;
+      box-shadow:none;
+      border-radius:0;
+      pointer-events:none;
+    }
+    .video-shell .offer.visible{
+      display:flex;
+      animation:ctaReveal .24s ease-out both;
+    }
+    .video-shell .cta{
+      pointer-events:auto;
+      width:min(100%,470px);
+      min-height:54px;
+      padding:14px 18px;
+      border-radius:12px;
+      background:#22a447;
+      color:#fff;
+      font-size:17px;
+      font-weight:900;
+      letter-spacing:.01em;
+      text-align:center;
+      text-decoration:none;
+      border:0;
+      box-shadow:0 5px 0 rgba(0,0,0,.18),0 8px 24px rgba(0,0,0,.28);
+      -webkit-tap-highlight-color:transparent;
+    }
+    .video-shell .cta-pulse{
+      animation:ctaPulseStrong 1.05s ease-in-out infinite;
+      transform-origin:center;
+      will-change:transform,box-shadow;
+    }
+    @keyframes ctaReveal{
+      from{opacity:0;transform:translateY(10px) scale(.96)}
+      to{opacity:1;transform:translateY(0) scale(1)}
+    }
+    @keyframes ctaPulseStrong{
+      0%,100%{
+        transform:scale(1);
+        box-shadow:0 5px 0 rgba(0,0,0,.18),0 8px 24px rgba(0,0,0,.28),0 0 0 0 rgba(34,164,71,.50);
+      }
+      42%{
+        transform:scale(1.075);
+        box-shadow:0 5px 0 rgba(0,0,0,.18),0 10px 30px rgba(0,0,0,.32),0 0 0 13px rgba(34,164,71,0);
+      }
+      65%{transform:scale(.995)}
+    }
+    @media(max-width:560px){
+      .video-shell .offer{left:12px;right:12px;bottom:25px}
+      .video-shell .cta{min-height:52px;font-size:16px;padding:13px 14px}
+    }
+
   </style>
 </head>
 <body>
@@ -254,6 +318,10 @@
             </div>
             <span class="sound-hint" id="soundHint">Toque no vídeo para ouvir desde o início</span>
           </div>
+          
+          <section class="offer" id="offerSection" aria-label="Oferta">
+      <a id="cta" class="cta cta-pulse" href="#" target="_blank" rel="noopener">QUERO ACESSAR AGORA</a>
+    </section>
           <div class="player-progress" aria-hidden="true"><div id="progressFill" class="player-progress-fill"></div></div>
         </div>
       </div>
@@ -279,9 +347,7 @@
         <button class="action" id="shareBtn" type="button"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 4l5 4-5 4V9c-3.73 0-6.1 1.67-7 5 .21-4.67 2.55-8 7-8V4z"/></svg><span>Compartilhar</span></button>
       </div>
 
-      <section class="offer" id="offerSection" aria-label="Oferta">
-      <a id="cta" class="cta cta-pulse" href="#" target="_blank" rel="noopener">QUERO ACESSAR AGORA</a>
-    </section>
+      
 
       <section class="comments" aria-label="Comentários">
         <div class="comment-sort"><span>Comentários</span><span>Mais relevantes <span class="caret">▾</span></span></div>
