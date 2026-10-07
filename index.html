@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#f0f2f5" />
-  <meta name="description" content="Template reutilizável Face VSL" />
+  <meta name="description" content="Template reutilizável de página Face VSL" />
   <title>Face VSL Template</title>
   <style>
     :root{
@@ -12,133 +12,209 @@
       --card:#fff;
       --text:#050505;
       --muted:#65676b;
-      --line:#e4e6eb;
-      --blue:#0866ff;
-      --hover:#f2f2f2;
+      --muted-2:#8a8d91;
+      --line:#ced0d4;
+      --soft:#f0f2f5;
+      --soft-2:#e4e6eb;
+      --blue:#1877f2;
+      --blue-dark:#166fe5;
       --green:#22a447;
-      --danger:#e41e3f;
+      --danger:#f02849;
+      --warning:#f7b928;
       --max:680px;
-      --radius:10px;
       --shadow:0 1px 2px rgba(0,0,0,.12);
+      --radius:10px;
     }
-
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
       background:var(--bg);
       color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      font-family:Helvetica, Arial, sans-serif;
       -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
     }
     button,input,textarea{font:inherit}
     button{cursor:pointer}
     a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
     .topbar{
-      position:sticky;top:0;z-index:30;
-      height:56px;background:#fff;border-bottom:1px solid var(--line);
+      position:sticky;top:0;z-index:50;
+      background:#fff;border-bottom:1px solid var(--line);
+      box-shadow:0 1px 2px rgba(0,0,0,.06);
+      height:56px;
       display:flex;align-items:center;justify-content:center;
     }
-    .topbar-inner{width:min(100%,var(--max));padding:0 12px;display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.2px}
-    .brand-mark{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-size:22px;font-weight:900}
+    .topbar-inner{width:min(100%,var(--max));display:flex;align-items:center;justify-content:space-between;padding:0 12px}
+    .brand{display:flex;align-items:center;gap:8px;min-width:0}
+    .brand-mark{
+      width:40px;height:40px;border-radius:50%;background:var(--blue);
+      display:grid;place-items:center;color:#fff;font-size:27px;font-weight:800;line-height:1;
+      font-family:Arial,sans-serif;
+    }
+    .brand-text{
+      font-size:26px;font-weight:700;color:var(--blue);letter-spacing:-.5px;line-height:1;
+    }
     .top-actions{display:flex;gap:8px}
-    .circle-btn{width:36px;height:36px;border:0;border-radius:50%;background:#e4e6eb;display:grid;place-items:center;color:#1c1e21}
+    .circle-btn{
+      width:40px;height:40px;border:0;border-radius:50%;background:var(--soft-2);
+      display:grid;place-items:center;color:#1c1e21;padding:0;
+    }
+    .circle-btn svg{width:20px;height:20px}
 
     main{width:min(100%,var(--max));margin:14px auto 52px;padding:0 10px}
-    .post{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-    .post-head{display:flex;gap:10px;align-items:center;padding:12px 16px 7px}
-    .avatar{width:42px;height:42px;border-radius:50%;flex:0 0 auto;background:linear-gradient(135deg,#d8e7ff,#bfd3ff);display:grid;place-items:center;font-weight:800;color:#1f4b88;overflow:hidden}
-    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .post,.offer{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+
+    .post-head{display:flex;gap:10px;align-items:flex-start;padding:12px 16px 8px}
+    .avatar,.mini-avatar{
+      position:relative;flex:0 0 auto;overflow:hidden;border-radius:50%;
+      background:linear-gradient(135deg,#dce7ff,#bed2ff);
+      display:grid;place-items:center;color:#315ba2;font-weight:700;
+    }
+    .avatar{width:40px;height:40px;font-size:14px}
+    .mini-avatar{width:32px;height:32px;font-size:11px}
+    .avatar img,.mini-avatar img{width:100%;height:100%;object-fit:cover}
     .identity{min-width:0;flex:1}
-    .identity-line{display:flex;align-items:center;gap:5px;min-width:0}
+    .identity-line{display:flex;align-items:center;gap:4px;min-width:0}
     .page-name{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .verified{width:15px;height:15px;border-radius:50%;background:var(--blue);display:inline-grid;place-items:center;color:#fff;font-size:10px;font-weight:900}
-    .meta{margin-top:2px;font-size:13px;color:var(--muted);display:flex;gap:4px;align-items:center}
-    .kebab{border:0;background:transparent;font-size:24px;line-height:1;color:var(--muted);padding:4px 2px}
+    .verified{
+      width:14px;height:14px;border-radius:50%;display:inline-grid;place-items:center;
+      background:var(--blue);color:#fff;flex:0 0 auto;
+    }
+    .verified svg{width:9px;height:9px}
+    .meta{margin-top:2px;display:flex;align-items:center;gap:4px;color:var(--muted);font-size:13px;line-height:1}
+    .meta .globe{display:inline-grid;place-items:center;color:var(--muted)}
+    .meta .globe svg{width:12px;height:12px}
+    .kebab{background:transparent;border:0;color:var(--muted);padding:4px;margin:-4px -4px 0 0;line-height:1;display:grid;place-items:center}
+    .kebab svg{width:20px;height:20px}
 
-    .post-copy{padding:4px 16px 12px;font-size:15px;line-height:1.42;white-space:pre-line}
-    .post-copy strong{font-weight:700}
+    .post-copy{padding:0 16px 12px;font-size:15px;line-height:1.34;white-space:pre-line}
 
-    .video-shell{position:relative;background:#050505;aspect-ratio:16/9;overflow:hidden}
+    .video-shell{position:relative;background:#000;aspect-ratio:16/9;overflow:hidden}
     .video-shell video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
-    .video-placeholder{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,#263241 0,#151a20 45%,#050505 100%);color:#fff;text-align:center;padding:24px}
+    .video-placeholder{
+      position:absolute;inset:0;border:0;color:#fff;
+      display:grid;place-items:center;text-align:center;
+      background:radial-gradient(circle at center, rgba(46,52,64,.55), rgba(0,0,0,.88));
+      padding:24px;
+    }
     .video-placeholder.hidden{display:none}
-    .play-orb{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.94);color:#111;display:grid;place-items:center;margin:0 auto 12px;font-size:29px;padding-left:4px;box-shadow:0 8px 25px rgba(0,0,0,.25)}
-    .video-placeholder small{display:block;opacity:.78;margin-top:7px}
+    .play-orb{
+      width:72px;height:72px;border-radius:50%;display:grid;place-items:center;
+      background:rgba(255,255,255,.95);color:#111;margin:0 auto 12px;box-shadow:0 10px 24px rgba(0,0,0,.25)
+    }
+    .play-orb svg{width:28px;height:28px;margin-left:4px}
+    .video-placeholder strong{display:block;font-size:20px;line-height:1.15}
+    .video-placeholder small{display:block;opacity:.86;margin-top:8px;font-size:13px}
 
-    .engagement{padding:9px 16px 7px;display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:14px;border-bottom:1px solid var(--line)}
-    .reactions{display:flex;align-items:center;gap:6px}
-    .reaction-stack{display:flex;align-items:center}
-    .reaction-chip{width:19px;height:19px;border-radius:50%;display:grid;place-items:center;color:white;font-size:11px;border:2px solid #fff;margin-left:-4px}
-    .reaction-chip:first-child{margin-left:0;background:var(--blue)}
-    .reaction-chip:nth-child(2){background:var(--danger)}
-    .reaction-chip:nth-child(3){background:#f7b125}
-    .social-stats{display:flex;gap:10px}
+    .engagement{padding:10px 16px 8px;display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:14px;border-bottom:1px solid var(--line);gap:8px}
+    .reactions{display:flex;align-items:center;gap:6px;min-width:0}
+    .reaction-stack{display:flex;align-items:center;position:relative}
+    .reaction-chip{
+      width:18px;height:18px;border-radius:50%;display:grid;place-items:center;border:1.5px solid #fff;margin-left:-2px;
+      box-shadow:0 0 0 1px rgba(0,0,0,.04)
+    }
+    .reaction-chip:first-child{margin-left:0}
+    .reaction-chip svg{width:18px;height:18px}
+    .stats-link{white-space:nowrap}
+    .social-stats{display:flex;gap:8px;white-space:nowrap;flex-wrap:wrap;justify-content:flex-end}
 
-    .action-row{padding:4px 8px;display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}
-    .action{border:0;background:transparent;border-radius:7px;padding:9px 6px;color:var(--muted);font-weight:650;display:flex;gap:7px;align-items:center;justify-content:center;transition:.15s ease}
-    .action:hover{background:var(--hover)}
+    .action-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:4px 8px;border-bottom:1px solid var(--line)}
+    .action{
+      border:0;background:transparent;border-radius:6px;padding:8px 6px;color:var(--muted);font-weight:600;
+      display:flex;align-items:center;justify-content:center;gap:6px;transition:background .15s ease,color .15s ease;
+    }
+    .action:hover{background:#f2f3f5}
     .action.active{color:var(--blue)}
-    .action-icon{font-size:18px;line-height:1}
+    .action svg{width:18px;height:18px;flex:0 0 auto}
 
-    .comments{padding:12px 12px 14px}
-    .comment-composer{display:flex;gap:8px;margin-bottom:13px}
-    .mini-avatar{width:34px;height:34px;border-radius:50%;flex:0 0 auto;background:#e4e6eb;display:grid;place-items:center;font-weight:700;color:#5b5f65;font-size:12px}
+    .comments{padding:10px 12px 14px}
+    .comment-sort{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:15px;font-weight:600;margin-bottom:10px}
+    .comment-sort .caret{font-size:12px;transform:translateY(-1px)}
+    .comment-composer{display:flex;gap:8px;margin-bottom:12px}
     .composer-box{position:relative;flex:1}
-    .composer-input{width:100%;border:0;outline:0;background:#f0f2f5;border-radius:18px;padding:9px 42px 9px 12px;color:var(--text)}
-    .send-comment{position:absolute;right:5px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--blue);font-weight:800;padding:5px 8px}
+    .composer-input{
+      width:100%;border:0;outline:0;background:var(--soft);border-radius:18px;padding:9px 102px 9px 12px;color:var(--text)
+    }
+    .composer-tools{position:absolute;right:8px;top:50%;transform:translateY(-50%);display:flex;gap:7px;align-items:center}
+    .send-comment{
+      border:0;background:transparent;color:var(--blue);font-weight:700;padding:2px 0;line-height:1
+    }
+    .tiny-icon{display:grid;place-items:center;color:var(--muted-2)}
+    .tiny-icon svg{width:18px;height:18px}
 
-    .comment{display:flex;gap:8px;margin-top:11px}
+    .comment{display:flex;gap:8px;margin-top:12px}
     .comment-body{min-width:0;flex:1}
-    .bubble{display:inline-block;max-width:100%;background:#f0f2f5;border-radius:18px;padding:8px 11px}
-    .comment-name{font-size:13px;font-weight:750;margin-bottom:2px}
-    .comment-text{font-size:14px;line-height:1.32;white-space:pre-line}
-    .comment-actions{display:flex;gap:11px;font-size:12px;color:var(--muted);font-weight:650;padding:3px 8px}
-    .comment-like{border:0;background:transparent;color:inherit;font-weight:700;padding:0}
+    .bubble{
+      display:inline-block;max-width:100%;background:var(--soft);border-radius:18px;padding:8px 12px 9px;
+      position:relative;
+    }
+    .comment-name{font-size:13px;font-weight:700;margin-bottom:1px}
+    .comment-text{font-size:14px;line-height:1.33;white-space:pre-line}
+    .comment-actions{display:flex;gap:12px;align-items:center;color:var(--muted);font-size:12px;font-weight:600;padding:4px 8px 0}
+    .comment-like{border:0;background:transparent;color:inherit;font-weight:600;padding:0}
     .comment-like.active{color:var(--blue)}
+    .comment-likes{white-space:nowrap}
+    .load-more{margin-top:14px;background:transparent;border:0;padding:0;color:var(--muted);font-weight:600;font-size:14px}
 
-    .offer{margin-top:14px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 16px;text-align:center;display:none}
-    .offer.visible{display:block;animation:reveal .35s ease both}
+    .offer{margin-top:14px;padding:18px 16px;text-align:center;display:none}
+    .offer.visible{display:block;animation:reveal .3s ease both}
     @keyframes reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
     .offer-kicker{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--blue)}
     .offer h2{font-size:24px;line-height:1.1;margin:7px auto 8px;max-width:560px}
     .offer p{margin:0 auto 14px;color:var(--muted);font-size:15px;line-height:1.4;max-width:560px}
-    .cta{border:0;border-radius:10px;background:var(--green);color:#fff;font-weight:800;font-size:17px;padding:14px 18px;width:min(100%,520px);box-shadow:0 4px 0 rgba(0,0,0,.13);transition:.16s ease;display:inline-block}
-    .cta:hover{filter:brightness(.96);transform:translateY(-1px)}
+    .cta{
+      border:0;border-radius:10px;background:var(--green);color:#fff;font-weight:800;font-size:17px;
+      padding:14px 18px;width:min(100%,520px);display:inline-block;box-shadow:0 4px 0 rgba(0,0,0,.13);transition:.16s ease
+    }
+    .cta:hover{filter:brightness(.98);transform:translateY(-1px)}
     .cta:active{transform:translateY(1px);box-shadow:0 2px 0 rgba(0,0,0,.13)}
     .microcopy{font-size:12px;color:var(--muted);margin-top:9px}
 
-    .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,16px);background:#1c1e21;color:#fff;border-radius:9px;padding:10px 14px;font-size:13px;opacity:0;pointer-events:none;transition:.2s ease;z-index:99;max-width:calc(100vw - 28px);text-align:center}
+    .toast{
+      position:fixed;left:50%;bottom:22px;transform:translate(-50%,16px);
+      background:#1c1e21;color:#fff;border-radius:9px;padding:10px 14px;font-size:13px;
+      opacity:0;pointer-events:none;transition:.2s ease;z-index:99;max-width:calc(100vw - 28px);text-align:center
+    }
     .toast.show{opacity:1;transform:translate(-50%,0)}
 
     .footer-note{color:#8a8d91;text-align:center;font-size:11px;line-height:1.45;padding:24px 12px}
 
     @media (max-width:560px){
       body{background:#fff}
-      .topbar{height:50px}
+      .topbar{height:52px}
       .topbar-inner{padding:0 10px}
-      .brand-mark{width:32px;height:32px;font-size:20px}
-      .circle-btn{width:33px;height:33px}
+      .brand-mark{width:36px;height:36px;font-size:24px}
+      .brand-text{font-size:24px}
+      .circle-btn{width:36px;height:36px}
       main{padding:0;margin:0 auto 28px}
       .post,.offer{border-radius:0;box-shadow:none}
-      .post-head{padding-left:12px;padding-right:12px}
-      .post-copy{padding-left:12px;padding-right:12px}
-      .engagement{padding-left:12px;padding-right:12px}
+      .post-head,.post-copy,.engagement{padding-left:12px;padding-right:12px}
+      .comments{padding-left:12px;padding-right:12px}
       .offer{border-top:8px solid var(--bg);margin-top:0;padding:20px 14px 22px}
-      .action{font-size:14px}
-      .social-stats .shares-label{display:none}
+      .social-stats{font-size:13px}
+      .composer-input{padding-right:92px}
+      .footer-note{padding-bottom:34px}
     }
   </style>
 </head>
 <body>
   <header class="topbar" aria-label="Barra superior">
     <div class="topbar-inner">
-      <div class="brand"><span class="brand-mark">f</span><span id="brandText">Social</span></div>
+      <div class="brand">
+        <div class="brand-mark">f</div>
+        <div class="brand-text" id="brandText">facebook</div>
+      </div>
       <div class="top-actions" aria-hidden="true">
-        <button class="circle-btn" tabindex="-1">⌕</button>
-        <button class="circle-btn" tabindex="-1">☰</button>
+        <button class="circle-btn" tabindex="-1" type="button">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M8.5 3a5.5 5.5 0 014.36 8.85l3.64 3.64-1.41 1.41-3.64-3.64A5.5 5.5 0 118.5 3zm0 2a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/></svg>
+        </button>
+        <button class="circle-btn" tabindex="-1" type="button">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 5h14v2H3V5zm0 4h14v2H3V9zm0 4h14v2H3v-2z"/></svg>
+        </button>
       </div>
     </div>
   </header>
@@ -150,11 +226,18 @@
         <div class="identity">
           <div class="identity-line">
             <div class="page-name" id="pageName">Página da VSL</div>
-            <span class="verified" id="verifiedBadge" title="Verificado">✓</span>
+            <span class="verified" id="verifiedBadge" title="Verificado" aria-label="Verificado">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.55 16.6L5.4 12.46l1.41-1.42 2.74 2.73 7-7 1.42 1.42z"/></svg>
+            </span>
           </div>
-          <div class="meta"><span id="followers">128 mil seguidores</span><span>·</span><span>Patrocinado</span><span>·</span><span>🌐</span></div>
+          <div class="meta">
+            <span id="followers">128 mil seguidores</span><span>·</span><span>Patrocinado</span><span>·</span>
+            <span class="globe" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm5.79 7h-2.02a12.3 12.3 0 00-1.1-4 6.03 6.03 0 013.12 4zM10 4c.72.79 1.48 2.25 1.77 5H8.23C8.52 6.25 9.28 4.79 10 4zM4.21 11h2.02c.12 1.43.5 2.82 1.1 4a6.03 6.03 0 01-3.12-4zm2.02-2H4.21a6.03 6.03 0 013.12-4 12.3 12.3 0 00-1.1 4zM10 16c-.72-.79-1.48-2.25-1.77-5h3.54c-.29 2.75-1.05 4.21-1.77 5zm2.67-.99c.6-1.18.98-2.57 1.1-4h2.02a6.03 6.03 0 01-3.12 4z"/></svg></span>
+          </div>
         </div>
-        <button class="kebab" aria-label="Mais opções">•••</button>
+        <button class="kebab" aria-label="Mais opções" type="button">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 10a2 2 0 114 0 2 2 0 01-4 0zm4-6a2 2 0 100-4 2 2 0 000 4zm0 16a2 2 0 100-4 2 2 0 000 4z" transform="translate(2 0)"/></svg>
+        </button>
       </div>
 
       <div class="post-copy" id="postCopy"></div>
@@ -163,7 +246,7 @@
         <video id="vsl" playsinline controls preload="metadata"></video>
         <button class="video-placeholder" id="videoPlaceholder" type="button" aria-label="Iniciar vídeo">
           <div>
-            <div class="play-orb">▶</div>
+            <div class="play-orb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
             <strong id="videoHeadline">Toque para assistir</strong>
             <small id="videoSub">Ative o som para uma melhor experiência</small>
           </div>
@@ -173,31 +256,54 @@
       <div class="engagement">
         <div class="reactions">
           <div class="reaction-stack" aria-hidden="true">
-            <span class="reaction-chip">👍</span><span class="reaction-chip">♥</span><span class="reaction-chip">😮</span>
+            <span class="reaction-chip" title="Curtir">
+              <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#1877f2"/><path fill="#fff" d="M8.5 16h5.04c.74 0 1.38-.52 1.54-1.24l.91-4A1.57 1.57 0 0014.46 9H12V6.66c0-.9-.7-1.66-1.57-1.66-.31 0-.61.12-.83.34L7 7.92V16h1.5zM4 16h2V8H4v8z"/></svg>
+            </span>
+            <span class="reaction-chip" title="Amei">
+              <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#f02849"/><path fill="#fff" d="M10 14.8l-.58-.53C6.1 11.26 4 9.35 4 7 4 5.35 5.35 4 7 4c.93 0 1.82.43 2.4 1.11C9.98 4.43 10.87 4 11.8 4 13.45 4 14.8 5.35 14.8 7c0 2.35-2.1 4.26-5.42 7.27L10 14.8z"/></svg>
+            </span>
+            <span class="reaction-chip" title="Uau">
+              <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#f7b928"/><path fill="#5b3a00" d="M6.2 7.5a1 1 0 100 2 1 1 0 000-2zm7.6 0a1 1 0 100 2 1 1 0 000-2zM10 13.5c-1.67 0-3-.9-3-2h6c0 1.1-1.33 2-3 2zm-3.4-4.85l.7-.7 1.2 1.2 1.2-1.2.7.7-1.9 1.9-1.9-1.9zm5.4 0l.7-.7 1.2 1.2 1.2-1.2.7.7-1.9 1.9-1.9-1.9z"/></svg>
+            </span>
           </div>
-          <span id="likeCountLabel">2,4 mil</span>
+          <span id="likeCountLabel" class="stats-link">2,4 mil</span>
         </div>
         <div class="social-stats">
           <span><span id="commentCountLabel">327</span> comentários</span>
-          <span class="shares-label"><span id="shareCountLabel">84</span> compartilhamentos</span>
+          <span><span id="shareCountLabel">84</span> compartilhamentos</span>
         </div>
       </div>
 
       <div class="action-row">
-        <button class="action" id="likeBtn" type="button"><span class="action-icon">♡</span><span>Curtir</span></button>
-        <button class="action" id="commentBtn" type="button"><span class="action-icon">◯</span><span>Comentar</span></button>
-        <button class="action" id="shareBtn" type="button"><span class="action-icon">↗</span><span>Compartilhar</span></button>
+        <button class="action" id="likeBtn" type="button">
+          <svg class="like-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M7.8 16h5.61c.72 0 1.34-.49 1.51-1.19l.97-4.11c.23-.98-.51-1.9-1.51-1.9H12V6.44C12 5.1 10.93 4 9.6 4c-.35 0-.69.15-.93.41L6.2 7.16V16h1.6zM4 16h1.2V7.8H4V16z"/></svg>
+          <span>Curtir</span>
+        </button>
+        <button class="action" id="commentBtn" type="button">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 3c-4.05 0-7 2.45-7 5.83 0 1.93 1 3.63 2.73 4.72L5.2 17l3.31-1.82c.48.08.98.12 1.49.12 4.05 0 7-2.45 7-5.83S14.05 3 10 3z"/></svg>
+          <span>Comentar</span>
+        </button>
+        <button class="action" id="shareBtn" type="button">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 4l5 4-5 4V9c-3.73 0-6.1 1.67-7 5 .21-4.67 2.55-8 7-8V4z"/></svg>
+          <span>Compartilhar</span>
+        </button>
       </div>
 
       <section class="comments" aria-label="Comentários">
+        <div class="comment-sort"><span>Comentários</span><span>Mais relevantes <span class="caret">▾</span></span></div>
         <div class="comment-composer">
-          <div class="mini-avatar">Você</div>
+          <div class="mini-avatar" id="selfAvatar">Você</div>
           <div class="composer-box">
             <input id="commentInput" class="composer-input" maxlength="280" placeholder="Escreva um comentário…" aria-label="Escreva um comentário" />
-            <button id="sendComment" class="send-comment" type="button">Enviar</button>
+            <div class="composer-tools">
+              <span class="tiny-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M6 5a3 3 0 105.65 1.35h2.1a3 3 0 11-.65 1.9v5.25A2.5 2.5 0 0110.6 16H5.4A2.5 2.5 0 013 13.5v-6A2.5 2.5 0 015.4 5H6zm7.5 3A1.5 1.5 0 1015 9.5 1.5 1.5 0 0013.5 8z"/></svg></span>
+              <span class="tiny-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 18a8 8 0 110-16 8 8 0 010 16zm-2.8-7a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2zm5.6 0a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2zm-5.97-3.08l1.1.66A2.92 2.92 0 0110 7.7c.8 0 1.57.3 2.16.88l1.02-.74A4.45 4.45 0 0010 6.5a4.44 4.44 0 00-3.17 1.42z"/></svg></span>
+              <button id="sendComment" class="send-comment" type="button">Publicar</button>
+            </div>
           </div>
         </div>
         <div id="commentsList"></div>
+        <button id="loadMoreBtn" class="load-more" type="button">Ver mais comentários</button>
       </section>
     </article>
 
@@ -209,36 +315,30 @@
       <div class="microcopy" id="microcopy">Compra segura • acesso conforme sua oferta</div>
     </section>
 
-    <div class="footer-note" id="footerNote">Template independente para páginas de VSL. Personalize textos, identidade e links antes de publicar.</div>
+    <div class="footer-note" id="footerNote">Template independente inspirado em interface social para páginas de VSL. Personalize textos, identidade e links antes de publicar.</div>
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    /* ==========================================================
-       CONFIGURAÇÃO RÁPIDA
-       Troque somente este objeto para reaproveitar o template.
-       ========================================================== */
     const CONFIG = {
-      brandText: "Social",
+      brandText: "facebook",
       pageName: "Especialista em Bem-estar",
-      avatarUrl: "", // URL opcional de foto de perfil
+      avatarUrl: "", // coloque aqui a foto principal da página
       verified: true,
       followersText: "128 mil seguidores",
 
-      postText: `Eu descobri uma abordagem simples que mudou completamente a forma como minhas alunas encaram esse problema.\n\n▶️ Assista ao vídeo abaixo até o final e entenda o passo a passo.`,
+      postText: `Eu descobri uma abordagem simples que mudou completamente a forma como minhas alunas encaram esse problema. 👇\n\nAssista ao vídeo abaixo até o final com o som ligado para entender o passo a passo.`,
 
-      videoUrl: "", // ex.: "./assets/vsl.mp4" ou URL CDN
-      posterUrl: "", // opcional
+      videoUrl: "",
+      posterUrl: "",
       videoHeadline: "Toque para assistir",
       videoSub: "Ative o som para uma melhor experiência",
 
       initialLikes: 2418,
-      initialComments: 327,
-      initialShares: 84,
+      initialComments: 263,
+      initialShares: 42,
 
-      // CTA aparece após X segundos REAIS assistidos.
-      // Use 0 para aparecer imediatamente.
       ctaDelaySeconds: 8,
       offerKicker: "Acesso liberado",
       offerTitle: "Continue para ver a oferta completa",
@@ -247,10 +347,19 @@
       ctaUrl: "#",
       microcopy: "Compra segura • acesso conforme sua oferta",
 
+      selfAvatarText: "Você",
+      commentsPerPage: 6,
       comments: [
-        { name: "Mariana Costa", initials: "MC", text: "Assisti até o final e fez muito sentido. Explicação bem direta!", time: "12 min", likes: 18 },
-        { name: "Ana Paula", initials: "AP", text: "Eu estava procurando algo explicado desse jeito. Vou continuar assistindo 👏", time: "27 min", likes: 9 },
-        { name: "Carla Mendes", initials: "CM", text: "Gostei porque foi direto ao ponto e sem enrolação.", time: "1 h", likes: 24 }
+        { name: "Mariana Costa", avatarUrl: "", initials: "MC", text: "Assisti até o final e fez muito sentido. Explicação bem direta!", time: "12 min", likes: 18 },
+        { name: "Ana Paula", avatarUrl: "", initials: "AP", text: "Eu estava procurando algo explicado desse jeito. Vou continuar assistindo 👏", time: "27 min", likes: 9 },
+        { name: "Carla Mendes", avatarUrl: "", initials: "CM", text: "Gostei porque foi direto ao ponto e sem enrolação.", time: "1 h", likes: 24 },
+        { name: "Fernanda Oliveira", avatarUrl: "", initials: "FO", text: "Já vi muita coisa sobre isso, mas desse jeito ficou fácil de entender.", time: "2 h", likes: 13 },
+        { name: "Juliana Rocha", avatarUrl: "", initials: "JR", text: "Comecei a assistir por curiosidade e acabei vendo tudo.", time: "3 h", likes: 31 },
+        { name: "Patrícia Alves", avatarUrl: "", initials: "PA", text: "Muito bom quando explica o porquê e não só promete resultado.", time: "4 h", likes: 7 },
+        { name: "Beatriz Nunes", avatarUrl: "", initials: "BN", text: "Salvei para assistir de novo depois, achei bem interessante.", time: "5 h", likes: 5 },
+        { name: "Luciana Lima", avatarUrl: "", initials: "LL", text: "Fui assistindo e me identifiquei em vários pontos.", time: "6 h", likes: 14 },
+        { name: "Renata Souza", avatarUrl: "", initials: "RS", text: "Vídeo bem feito e com uma linguagem fácil. Valeu a pena ver até o fim.", time: "7 h", likes: 11 },
+        { name: "Tatiane Martins", avatarUrl: "", initials: "TM", text: "Gostei da explicação sobre o que normalmente não funciona mais. Faz sentido mesmo.", time: "8 h", likes: 6 }
       ]
     };
 
@@ -265,9 +374,14 @@
     let watchedSeconds = 0;
     let lastVideoTime = 0;
     let ctaRevealed = false;
+    let commentsRendered = 0;
 
     function initialsFromName(name){
       return name.trim().split(/\s+/).slice(0,2).map(x => x[0]?.toUpperCase() || "").join("") || "PV";
+    }
+
+    function escapeHtml(str){
+      return String(str).replace(/[&<>'"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#039;",'"':"&quot;"}[ch]));
     }
 
     function toast(msg){
@@ -290,11 +404,20 @@
       $("#offerSection").classList.add("visible");
     }
 
-    function renderComment(c, prepend=false){
+    function avatarMarkup(item, size="mini"){
+      const cls = size === "main" ? "avatar" : "mini-avatar";
+      const initials = escapeHtml(item.initials || initialsFromName(item.name || CONFIG.pageName));
+      if (item.avatarUrl) {
+        return `<div class="${cls}"><img src="${escapeHtml(item.avatarUrl)}" alt="" loading="lazy" decoding="async"></div>`;
+      }
+      return `<div class="${cls}">${initials}</div>`;
+    }
+
+    function buildCommentNode(c){
       const wrap = document.createElement("div");
       wrap.className = "comment";
       wrap.innerHTML = `
-        <div class="mini-avatar">${escapeHtml(c.initials || initialsFromName(c.name))}</div>
+        ${avatarMarkup(c)}
         <div class="comment-body">
           <div class="bubble">
             <div class="comment-name">${escapeHtml(c.name)}</div>
@@ -304,22 +427,29 @@
             <button class="comment-like" type="button">Curtir</button>
             <span>Responder</span>
             <span>${escapeHtml(c.time || "Agora")}</span>
-            <span class="comment-likes">${c.likes ? `· ${c.likes} 👍` : ""}</span>
+            <span class="comment-likes">${Number(c.likes || 0) > 0 ? `· ${Number(c.likes).toLocaleString("pt-BR")} curtidas` : ""}</span>
           </div>
         </div>`;
+
       const like = wrap.querySelector(".comment-like");
       const counter = wrap.querySelector(".comment-likes");
       let n = Number(c.likes || 0), on = false;
       like.addEventListener("click", () => {
         on = !on; n += on ? 1 : -1;
         like.classList.toggle("active", on);
-        counter.textContent = n > 0 ? `· ${n} 👍` : "";
+        counter.textContent = n > 0 ? `· ${n.toLocaleString("pt-BR")} curtidas` : "";
       });
-      if (prepend) $("#commentsList").prepend(wrap); else $("#commentsList").append(wrap);
+      return wrap;
     }
 
-    function escapeHtml(str){
-      return String(str).replace(/[&<>'"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#039;",'"':"&quot;"}[ch]));
+    function renderMoreComments(count = CONFIG.commentsPerPage){
+      const list = $("#commentsList");
+      const end = Math.min(commentsRendered + count, CONFIG.comments.length);
+      for (let i = commentsRendered; i < end; i++) {
+        list.appendChild(buildCommentNode(CONFIG.comments[i]));
+      }
+      commentsRendered = end;
+      $("#loadMoreBtn").style.display = commentsRendered >= CONFIG.comments.length ? "none" : "inline-block";
     }
 
     function init(){
@@ -337,10 +467,11 @@
       $("#cta").textContent = CONFIG.ctaText;
       $("#cta").href = CONFIG.ctaUrl || "#";
       $("#microcopy").textContent = CONFIG.microcopy;
+      $("#selfAvatar").textContent = CONFIG.selfAvatarText;
 
       const avatar = $("#avatar");
       $("#avatarInitials").textContent = initialsFromName(CONFIG.pageName);
-      if (CONFIG.avatarUrl){
+      if (CONFIG.avatarUrl) {
         avatar.innerHTML = `<img src="${escapeHtml(CONFIG.avatarUrl)}" alt="Foto do perfil" loading="eager" decoding="async">`;
       }
 
@@ -349,7 +480,7 @@
       if (CONFIG.posterUrl) v.poster = CONFIG.posterUrl;
       if (!CONFIG.videoUrl) v.removeAttribute("controls");
 
-      CONFIG.comments.forEach(c => renderComment(c));
+      renderMoreComments();
       updateCounts();
       if (CONFIG.ctaDelaySeconds <= 0) revealCTA();
     }
@@ -358,7 +489,6 @@
       liked = !liked;
       likes += liked ? 1 : -1;
       $("#likeBtn").classList.toggle("active", liked);
-      $("#likeBtn .action-icon").textContent = liked ? "👍" : "♡";
       updateCounts();
       toast(liked ? "Você curtiu esta publicação" : "Curtida removida");
     });
@@ -386,7 +516,8 @@
       const input = $("#commentInput");
       const text = input.value.trim();
       if (!text) return;
-      renderComment({ name:"Você", initials:"VC", text, time:"Agora", likes:0 }, true);
+      const node = buildCommentNode({ name:"Você", initials:"VC", text, time:"Agora", likes:0 });
+      $("#commentsList").prepend(node);
       input.value = "";
       commentsCount += 1;
       updateCounts();
@@ -396,6 +527,7 @@
     $("#commentInput").addEventListener("keydown", e => {
       if (e.key === "Enter" && !e.shiftKey){ e.preventDefault(); sendComment(); }
     });
+    $("#loadMoreBtn").addEventListener("click", () => renderMoreComments());
 
     const video = $("#vsl");
     const placeholder = $("#videoPlaceholder");
@@ -407,14 +539,13 @@
       }
       placeholder.classList.add("hidden");
       video.setAttribute("controls", "");
-      try { await video.play(); } catch(e) { /* browser may block; controls remain */ }
+      try { await video.play(); } catch(e) {}
     });
 
     video.addEventListener("play", () => placeholder.classList.add("hidden"));
     video.addEventListener("timeupdate", () => {
       const now = video.currentTime || 0;
       const delta = now - lastVideoTime;
-      // Conta apenas progressão natural. Saltos grandes não liberam o CTA instantaneamente.
       if (delta > 0 && delta < 1.5 && !video.paused) watchedSeconds += delta;
       lastVideoTime = now;
       if (watchedSeconds >= CONFIG.ctaDelaySeconds) revealCTA();

@@ -1,58 +1,78 @@
 # Face VSL Template
 
-Template reutilizável de página VSL com aparência de feed social, feito em HTML/CSS/JS puro e otimizado para mobile.
+Template em **HTML/CSS/JS puro** para páginas no estilo **feed social + VSL**, pronto para subir na Vercel.
 
-## O que já funciona
+## Arquivos
 
-- Layout responsivo/mobile-first.
-- Perfil, seguidores, selo, copy e números sociais configuráveis.
-- Player de vídeo nativo HTML5.
-- CTA liberado depois de **tempo realmente assistido**.
-- Curtida com incremento/decremento visual.
-- Botão de comentar que leva ao campo.
-- Comentários locais editáveis e curtidas nos comentários.
-- Novo comentário inserido instantaneamente no feed.
-- Compartilhamento via Web Share API; fallback para copiar link.
-- Bloco de oferta/checkout configurável.
-- Sem bibliotecas externas e sem dependências.
+- `index.html` — página completa.
+- `vercel.json` — configuração simples para Vercel.
+- `README.md` — instruções rápidas.
 
-## Como personalizar
+## Como editar rápido
 
-Abra `index.html` e procure por:
+Abra o `index.html` e procure pelo objeto:
 
 ```js
 const CONFIG = {
 ```
 
-É ali que você altera:
+Troque principalmente:
 
-- `pageName`
-- `avatarUrl`
-- `followersText`
-- `postText`
-- `videoUrl`
-- `posterUrl`
-- `ctaDelaySeconds`
-- `offerTitle`
-- `offerText`
-- `ctaText`
-- `ctaUrl`
-- `comments`
+- `brandText` — texto do topo.
+- `pageName` — nome da página/persona.
+- `avatarUrl` — foto principal do perfil.
+- `followersText` — texto de seguidores.
+- `postText` — hook/copy acima da VSL.
+- `videoUrl` — URL ou caminho do vídeo.
+- `posterUrl` — capa opcional do vídeo.
+- `initialLikes`, `initialComments`, `initialShares` — números sociais.
+- `ctaDelaySeconds` — segundos **realmente assistidos** antes de liberar a oferta.
+- `offerKicker`, `offerTitle`, `offerText`, `ctaText`, `ctaUrl`, `microcopy` — bloco da oferta.
+- `comments` — comentários iniciais.
+- `commentsPerPage` — quantos comentários aparecem por vez.
 
-### Vídeo local
+## Comentários com foto
 
-Crie uma pasta `assets`, coloque a VSL dentro dela e use:
+Cada comentário aceita:
 
 ```js
-videoUrl: "./assets/vsl.mp4"
+{
+  name: "Mariana Costa",
+  avatarUrl: "./assets/mariana.jpg",
+  initials: "MC",
+  text: "Comentário aqui",
+  time: "12 min",
+  likes: 18
+}
 ```
 
-Para performance, prefira um MP4 H.264 bem comprimido ou uma CDN de vídeo.
+Se `avatarUrl` estiver vazio, ele usa as iniciais.
 
-## Vercel
+## Foto principal da página
 
-O projeto pode ser enviado diretamente para a Vercel como site estático. O `vercel.json` incluído adiciona cache de assets e cabeçalhos básicos.
+Para usar a foto principal do perfil:
+
+```js
+avatarUrl: "./assets/perfil.jpg"
+```
+
+## CTA controlado pela retenção
+
+O CTA aparece depois do tempo definido em `ctaDelaySeconds`, contando apenas o tempo de vídeo **assistido de verdade**. Saltar o vídeo não libera o CTA instantaneamente.
+
+## Publicação na Vercel
+
+1. Coloque os arquivos em uma pasta.
+2. Se usar imagens/vídeos locais, crie uma pasta `assets/`.
+3. Faça upload para a Vercel.
 
 ## Observação
 
-O template usa uma interface social genérica inspirada em padrões de feed. Personalize marca, textos, imagens e disclosures para sua campanha antes de publicar.
+A estrutura foi deixada mais realista visualmente, com:
+
+- topo social mais fiel;
+- botões com estados ativos;
+- reação azul no Curtir;
+- contadores de reações/comentários/compartilhamentos;
+- lista maior de comentários;
+- suporte a foto de perfil na página e nos comentários.
