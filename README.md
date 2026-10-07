@@ -1,3 +1,3 @@
-# Face VSL — sem topo do Facebook
+# Face VSL — sem aviso no rodapé
 
-Versão sem a barra superior com o texto “facebook”, mantendo o resto da estrutura da postagem.
+Versão com as fotos de perfil embutidas e sem o texto de aviso no final da página.
