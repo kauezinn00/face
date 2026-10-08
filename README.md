@@ -24,8 +24,12 @@ Para testar apenas o vídeo remoto, abra /video-test.
 
 - CTA final configurado para aparecer em 22:13 (1333 segundos).
 
-- perfil atualizado para Dr. Elias Salem
-- foto de perfil trocada pela imagem enviada
-- patrocinado removido; agora mostra seguidores + Pública
-- selo verificado ajustado para ficar mais parecido com o exemplo
-- copy do post ajustada para a oferta de frequências
+- perfil atualizado para Dr. Augusto Valença com nova foto
+- selo verificado ajustado
+- removido “Patrocinado”; mantido seguidores + Pública
+- texto do post adaptado
+- comentários reescritos em tom neutro e reaproveitável
+
+- texto principal do post ajustado para VSL de frequências
+- removido o texto “Pública”, mantendo apenas o ícone
+- ícone de mais opções trocado para 3 pontos horizontais
