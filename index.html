@@ -139,7 +139,7 @@
     .offer-kicker{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--blue)}
     .offer h2{font-size:24px;line-height:1.1;margin:7px auto 8px;max-width:560px}
     .offer p{margin:0 auto 14px;color:var(--muted);font-size:15px;line-height:1.4;max-width:560px}
-    .cta{border:0;border-radius:10px;background:var(--green);color:#fff;font-weight:800;font-size:17px;padding:14px 18px;width:min(100%,520px);display:inline-block;box-shadow:0 4px 0 rgba(0,0,0,.13);transition:.16s ease}
+    .cta{border:0;border-radius:10px;background:var(--green);color:#fff;font-weight:800;font-size:15px;padding:13px 18px;width:min(100%,520px);display:inline-block;box-shadow:0 4px 0 rgba(0,0,0,.13);transition:.16s ease}
     .cta:hover{filter:brightness(.98);transform:translateY(-1px)}
     .cta:active{transform:translateY(1px);box-shadow:0 2px 0 rgba(0,0,0,.13)}
     .microcopy{font-size:12px;color:var(--muted);margin-top:9px}
@@ -232,7 +232,7 @@
       position:absolute;
       left:50%;
       right:auto;
-      bottom:27px;
+      bottom:108px;
       width:100%;
       transform:translateX(-50%);
       z-index:14;
@@ -241,6 +241,8 @@
       display:none;
       align-items:center;
       justify-content:center;
+      flex-direction:column;
+      gap:10px;
       background:transparent;
       box-shadow:none;
       border-radius:0;
@@ -250,9 +252,27 @@
       display:flex;
       animation:ctaReveal .24s ease-out both;
     }
+    .video-shell .offer-kicker{
+      pointer-events:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      max-width:min(84%,390px);
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(0,0,0,.76);
+      color:#fff;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.03em;
+      line-height:1.2;
+      text-align:center;
+      box-shadow:0 6px 20px rgba(0,0,0,.24);
+      text-transform:uppercase;
+    }
     .video-shell .cta{
       pointer-events:auto;
-      width:min(82%,390px);
+      width:min(84%,410px);
       min-height:52px;
       padding:14px 18px;
       border-radius:12px;
@@ -288,7 +308,7 @@
       65%{transform:scale(.995)}
     }
     @media(max-width:560px){
-      .video-shell .offer{left:12px;right:12px;bottom:25px}
+      .video-shell .offer{left:50%;right:auto;bottom:108px;width:100%;transform:translateX(-50%)}
       .video-shell .cta{min-height:52px;font-size:16px;padding:13px 14px}
     }
 
@@ -303,13 +323,13 @@
       box-shadow:none !important;
     }
     .video-shell .cta{
-      width:min(82%,390px) !important;
+      width:min(84%,410px) !important;
     }
     @media(max-width:560px){
       .video-shell .offer{
         left:50% !important;
         right:auto !important;
-        bottom:25px !important;
+        bottom:108px !important;
         width:100% !important;
         transform:translateX(-50%) !important;
         border-top:0 !important;
@@ -317,10 +337,10 @@
         margin:0 !important;
       }
       .video-shell .cta{
-        width:82% !important;
+        width:84% !important;
         min-height:50px !important;
         padding:12px 14px !important;
-        font-size:15px !important;
+        font-size:14px !important;
       }
     }
 
@@ -356,8 +376,9 @@
           </div>
           
           <section class="offer" id="offerSection" aria-label="Oferta">
-      <a id="cta" class="cta cta-pulse" href="#" target="_blank" rel="noopener">QUERO COMPRAR AGORA</a>
-    </section>
+            <div class="offer-kicker">CONDIÇÃO ESPECIAL DISPONÍVEL AGORA: R$47</div>
+            <a id="cta" class="cta cta-pulse" href="#" target="_blank" rel="noopener">QUERO GARANTIR MEU ACESSO ÀS FREQUÊNCIAS POR R$ 47</a>
+          </section>
           <div class="player-progress" aria-hidden="true"><div id="progressFill" class="player-progress-fill"></div></div>
         </div>
       </div>
@@ -422,7 +443,7 @@
       initialComments: 263,
       initialShares: 42,
       ctaDelaySeconds: 5,
-      ctaText: "QUERO COMPRAR AGORA",
+      ctaText: "QUERO GARANTIR MEU ACESSO ÀS FREQUÊNCIAS POR R$ 47",
       ctaUrl: "#",
       selfAvatarText: "Você",
       commentsPerPage: 4,

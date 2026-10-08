@@ -16,3 +16,8 @@ Mantidos:
 Para testar apenas o vídeo remoto, abra /video-test.
 
 - overlay de ativar som trocado pelo PNG pulsante clique-ativar-som.png
+
+- CTA atualizado para: QUERO GARANTIR MEU ACESSO ÀS FREQUÊNCIAS POR R$ 47
+
+- CTA ajustado com kicker: CONDIÇÃO ESPECIAL DISPONÍVEL AGORA: R$47
+- CTA movido para posição mais alta dentro do vídeo para não cobrir a legenda
