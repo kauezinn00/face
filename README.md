@@ -39,3 +39,7 @@ Para testar apenas o vídeo remoto, abra /video-test.
 - Botão Comentar removido.
 - Selo verificado trocado por roseta azul com check branco.
 - Mantidos Dr. Augusto Valença, três pontos horizontais, texto do post, R2 e CTA em 22:13.
+
+- botão “Comentar” restaurado na barra de ações
+- barrinha/campo para escrever e publicar comentário continua removida
+- ao tocar em “Comentar”, a página apenas rola até os comentários
