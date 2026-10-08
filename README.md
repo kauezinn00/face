@@ -33,3 +33,9 @@ Para testar apenas o vídeo remoto, abra /video-test.
 - texto principal do post ajustado para VSL de frequências
 - removido o texto “Pública”, mantendo apenas o ícone
 - ícone de mais opções trocado para 3 pontos horizontais
+
+- Comentários corrigidos: 10 identidades, 10 fotos únicas, sem perfil vazio e sem imagem compartilhada por nomes diferentes.
+- Caixa para escrever/publicar comentário removida.
+- Botão Comentar removido.
+- Selo verificado trocado por roseta azul com check branco.
+- Mantidos Dr. Augusto Valença, três pontos horizontais, texto do post, R2 e CTA em 22:13.
