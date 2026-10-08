@@ -21,3 +21,11 @@ Para testar apenas o vídeo remoto, abra /video-test.
 
 - CTA ajustado com kicker: CONDIÇÃO ESPECIAL DISPONÍVEL AGORA: R$47
 - CTA movido para posição mais alta dentro do vídeo para não cobrir a legenda
+
+- CTA final configurado para aparecer em 22:13 (1333 segundos).
+
+- perfil atualizado para Dr. Elias Salem
+- foto de perfil trocada pela imagem enviada
+- patrocinado removido; agora mostra seguidores + Pública
+- selo verificado ajustado para ficar mais parecido com o exemplo
+- copy do post ajustada para a oferta de frequências
