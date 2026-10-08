@@ -43,3 +43,5 @@ Para testar apenas o vídeo remoto, abra /video-test.
 - botão “Comentar” restaurado na barra de ações
 - barrinha/campo para escrever e publicar comentário continua removida
 - ao tocar em “Comentar”, a página apenas rola até os comentários
+
+- texto principal do post ajustado para falar de oração + frequência
