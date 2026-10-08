@@ -14,3 +14,5 @@ Mantidos:
 - temporização atual do CTA
 
 Para testar apenas o vídeo remoto, abra /video-test.
+
+- overlay de ativar som trocado pelo PNG pulsante clique-ativar-som.png

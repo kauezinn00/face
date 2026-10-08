@@ -174,17 +174,19 @@
     .video-shell video::-webkit-media-controls, .video-shell video::-webkit-media-controls-enclosure {display:none!important;}
     .player-progress {position:absolute;left:0;right:0;bottom:0;z-index:9;height:7px;background:rgba(255,255,255,.33);pointer-events:none;}
     .player-progress-fill {height:100%;width:0%;background:linear-gradient(90deg,#1877f2,#5db1ff);box-shadow:0 0 10px rgba(24,119,242,.45);transition:width .28s linear;}
-    .sound-gate {position:absolute;z-index:8;inset:0;display:flex;align-items:center;justify-content:flex-end;flex-direction:column;gap:7px;background:linear-gradient(transparent 56%,rgba(0,0,0,.12) 70%,rgba(0,0,0,.68) 100%);padding:20px 16px 28px;text-align:center;pointer-events:none;}
+    .sound-gate {position:absolute;z-index:8;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0;background:transparent;padding:20px 14px 42px;text-align:center;pointer-events:none;}
     .sound-gate[hidden] {display:none!important;}
-    .sound-activate {font-size:16px;font-weight:800;letter-spacing:.02em;line-height:1.2;border:none;border-radius:9px;color:#fff;background:#1877f2;padding:14px 18px;box-shadow:0 8px 28px rgba(0,0,0,.38);display:flex;align-items:center;justify-content:center;gap:8px;max-width:100%;animation:soft-pulse 2.5s ease-in-out infinite;pointer-events:none;}
-    .sound-activate svg {width:24px;height:24px;flex-shrink:0;}
-    .sound-hint {color:white;font-size:13px;font-weight:600;text-shadow:0 1px 4px #000;}
+    .sound-activate {display:block;width:min(90%,380px);max-width:90%;background:transparent;border:none;padding:0;margin:0;box-shadow:none;animation:soundOverlayPulse 1.25s ease-in-out infinite;transform-origin:center;pointer-events:none;}
+    .sound-activate img{display:block;width:100%;height:auto;filter:drop-shadow(0 14px 34px rgba(0,0,0,.28));}
+    .sound-activate svg{display:none!important;}
+    .sound-hidden-copy{display:none!important;}
+    .sound-hint {display:none!important;}
     .video-loader {display:none;position:absolute;top:16px;right:16px;z-index:6;width:26px;height:26px;border:3px solid rgba(255,255,255,.35);border-top-color:white;border-radius:50%;animation:spin .85s linear infinite;pointer-events:none;}
     .video-shell.is-buffering .video-loader {display:block;}
     @keyframes spin {to{transform:rotate(360deg)}}
-    @keyframes soft-pulse {50%{transform:scale(1.035)}}
+    @keyframes soundOverlayPulse {0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
     @media (prefers-reduced-motion:reduce){.sound-activate{animation:none}.player-progress-fill{transition:none}}
-    @media(max-width:560px) {.sound-activate {font-size:15px}.video-shell {max-width:404px}}
+    @media(max-width:560px) {.sound-activate{width:min(92%,350px)}.video-shell {max-width:404px}}
   
     .offer{
       margin:0;
@@ -347,8 +349,8 @@
           <div class="video-loader" aria-hidden="true"></div>
           <div class="sound-gate" id="soundGate" role="group" aria-label="Ativar áudio do vídeo">
             <div class="sound-activate" id="soundButton" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm12.5 3a4.5 4.5 0 00-2.5-4.03v8.05a4.5 4.5 0 002.5-4.02zM14 3.23v2.06A7 7 0 0114 18.7v2.06A9 9 0 0014 3.23z"/></svg>
-              <span id="soundButtonText">TOQUE PARA ATIVAR O SOM</span>
+              <img src="./clique-ativar-som.png" alt="O vídeo começou, clique para ativar o som" loading="eager" decoding="async">
+              <span id="soundButtonText" class="sound-hidden-copy">TOQUE PARA ATIVAR O SOM</span>
             </div>
             <span class="sound-hint" id="soundHint">Toque no vídeo para ouvir desde o início</span>
           </div>
