@@ -1,13 +1,4 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
-  "headers": [
-    {
-      "source": "/anjo-vsl-v7.mp4",
-      "headers": [
-        {"key":"Cache-Control","value":"public, max-age=0, must-revalidate"},
-        {"key":"Content-Type","value":"video/mp4"}
-      ]
-    }
-  ]
+  "trailingSlash": false
 }
